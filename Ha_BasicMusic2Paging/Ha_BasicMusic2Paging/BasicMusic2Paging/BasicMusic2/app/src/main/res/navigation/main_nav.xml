@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/allmusic"
+    app:startDestination="@id/fragmentListSong">
+
+    <fragment
+        android:id="@+id/fragmentListSong"
+        android:name="com.example.basicmusic.FragmentListSong"
+        android:label="FragmentListSong" >
+        <action
+            android:id="@+id/action_fragmentListSong_to_songDetailsFragment"
+            app:destination="@id/songDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/songDetailsFragment"
+        android:name="com.example.basicmusic.SongDetailsFragment"
+        android:label="SongDetailsFragment" >
+        <action
+            android:id="@+id/action_songDetailsFragment_to_fragmentListSong"
+            app:destination="@id/fragmentListSong" />
+    </fragment>
+</navigation>
