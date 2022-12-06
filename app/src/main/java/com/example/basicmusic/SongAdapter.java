@@ -35,7 +35,7 @@ public class SongAdapter extends PagingDataAdapter<Music, SongAdapter.SongViewHo
     public void setData(List<Music> data){
         mData = data;
         notifyDataSetChanged();
-        // PhucDV: Mỗi lần set lại data thì set lại cả music source
+        //  Mỗi lần set lại data thì set lại cả music source
         mMusicController.setMusicSource(new MusicController.MusicSource() {
             @Override
             public int getSize() {
@@ -53,7 +53,7 @@ public class SongAdapter extends PagingDataAdapter<Music, SongAdapter.SongViewHo
         super(diffCallback);
         mContext = context;
 
-        // PhucDV: Đổi sang singleton
+        //  Đổi sang singleton
         mMusicController = MusicController.getInstance(context);
     }
 
