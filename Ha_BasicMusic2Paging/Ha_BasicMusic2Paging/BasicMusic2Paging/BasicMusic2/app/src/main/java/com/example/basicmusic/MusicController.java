@@ -26,7 +26,7 @@ public class MusicController {
     private boolean mIsPreparing;
     private MusicSource mMusicSource;
 
-    // PhucDV: Đổi sang dạng singleton - start
+    // : Đổi sang dạng singleton - start
     private static MusicController sInstance;
 
     public static MusicController getInstance(Context context){
@@ -49,7 +49,7 @@ public class MusicController {
     public void setMusicSource(MusicSource musicSource){
         mMusicSource = musicSource;
     }
-    // PhucDV: Đổi sang dạng singleton - end
+    // : Đổi sang dạng singleton - end
 
     public MusicController(Context context) {
         mContext = context;
