@@ -25,6 +25,7 @@ public class MusicController {
     private int mCurrentIndex;
     private boolean mIsPreparing;
     private MusicSource mMusicSource;
+    private List<Song> mData;
 
     // : Đổi sang dạng singleton - start
     private static MusicController sInstance;
@@ -38,6 +39,13 @@ public class MusicController {
 
     public static MusicController getInstanceNoCreate(){
         return sInstance;
+    }
+    public void setData(List<Song> data) {
+        mData = data;
+    }
+
+    public List<Song> getData() {
+        return mData;
     }
 
     public interface MusicSource {

@@ -1,8 +1,10 @@
 package com.example.basicmusic;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +15,7 @@ import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -26,6 +29,8 @@ import com.example.basicmusic.data.Music;
 import com.example.basicmusic.databinding.FragmentListMusicBinding;
 
 import java.util.List;
+
+import phucdv.android.musichelper.Song;
 
 public class FragmentListSong extends Fragment {
     FragmentListMusicBinding listMusicBinding;
@@ -63,14 +68,31 @@ public class FragmentListSong extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         listMusicBinding.rcySong.setLayoutManager(linearLayoutManager);
         listMusicBinding.rcySong.setAdapter(mAdapter);
-
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         mAdapter.setItemClickListener(new SongAdapter.OnItemClickListener() {
             @Override
             public void onClick(View v, Music song, int pos) {
                 listMusicBinding.btnPlayPause.setImageResource(R.drawable.ic_baseline_pause_24);
                 mNavController.navigate(R.id.action_fragmentListSong_to_songDetailsFragment);
+                Bundle bundle = new Bundle();
+                String titleMusic = song.getTitle();
+                String singer = song.getSinger();
+                String imageMusic = String.valueOf(song.getAlbumUri());
+                Log.d("title--", "onClick: "+titleMusic);
+
+                bundle.putString("title_music",titleMusic);
+                bundle.putString("url_image",imageMusic);
+                SongDetailsFragment songDetailsFragment = new SongDetailsFragment();
+                songDetailsFragment.setArguments(bundle);
+                Log.d("databundle", "onClick: "+bundle);
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.containerDetails,songDetailsFragment);
+
+
+
             }
+
         });
+
 
 
         listMusicBinding.btnPlayPause.setOnClickListener(new View.OnClickListener() {
