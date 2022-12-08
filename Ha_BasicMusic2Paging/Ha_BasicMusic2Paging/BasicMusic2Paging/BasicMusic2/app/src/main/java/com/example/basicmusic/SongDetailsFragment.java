@@ -15,13 +15,22 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.example.basicmusic.data.Music;
+import com.example.basicmusic.databinding.FragmentListMusicBinding;
 import com.example.basicmusic.databinding.SongFragmentDetailBinding;
 
+import java.util.ArrayList;
+
+import phucdv.android.musichelper.Song;
+
 public class SongDetailsFragment extends Fragment {
+    ArrayList<Song> arraySong;
+    int position = 0;
     SongFragmentDetailBinding songdetailsbinding;
+    NavController mNavController;
     private SongAdapter mAdapter;
 
     private MainActivityViewModel mViewModel;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,21 +41,33 @@ public class SongDetailsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         songdetailsbinding = SongFragmentDetailBinding.inflate(inflater,container,false);
         return songdetailsbinding.getRoot();
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        // Ẩn action barTop;
+
+        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+
+
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+//        songdetailsbinding.txtTitle.setText(arraySong.);
+        mNavController =
+                Navigation.findNavController(requireActivity(), R.id.idFragmentContainer);
         mAdapter = new SongAdapter(getContext(), new MusicComparator());
         mAdapter.setItemClickListener(new SongAdapter.OnItemClickListener() {
             @Override
             public void onClick(View v, Music song, int pos) {
                 songdetailsbinding.btnPlayPause.setImageResource(R.drawable.ic_baseline_play_arrow_24);
+
             }
         });
+        songdetailsbinding.btnBack.setOnClickListener(v ->{
+            mNavController.navigate(R.id.action_songDetailsFragment_to_fragmentListSong);
 
-
+        });
 
         songdetailsbinding.btnPlayPause.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,4 +100,5 @@ public class SongDetailsFragment extends Fragment {
             }
         });
     }
+
 }
