@@ -3,22 +3,60 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/allmusic"
-    app:startDestination="@id/fragmentListSong">
+    app:startDestination="@id/fragmentContainer">
 
     <fragment
         android:id="@+id/fragmentListSong"
         android:name="com.example.basicmusic.FragmentListSong"
         android:label="FragmentListSong" >
-        <action
-            android:id="@+id/action_fragmentListSong_to_songDetailsFragment"
-            app:destination="@id/songDetailsFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/songDetailsFragment"
         android:name="com.example.basicmusic.SongDetailsFragment"
         android:label="SongDetailsFragment" >
+
         <action
-            android:id="@+id/action_songDetailsFragment_to_fragmentListSong"
+            android:id="@+id/action_songDetailsFragment_to_fragmentContainer"
+            app:destination="@id/fragmentContainer" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeMusic"
+        android:name="com.example.basicmusic.MainFragment.HomeMusic"
+        android:label="HomeMusic" />
+    <fragment
+        android:id="@+id/playlistMusic"
+        android:name="com.example.basicmusic.MainFragment.PlaylistMusic"
+        android:label="PlaylistMusic" />
+    <fragment
+        android:id="@+id/loginMusic"
+        android:name="com.example.basicmusic.MainFragment.LoginMusic"
+        android:label="LoginMusic" />
+    <fragment
+        android:id="@+id/settingMusic"
+        android:name="com.example.basicmusic.MainFragment.SettingMusic"
+        android:label="SettingMusic" />
+    <fragment
+        android:id="@+id/fragmentContainer"
+        android:name="com.example.basicmusic.MainFragment.FragmentContainer"
+        android:label="FragmentContainer" >
+        <action
+            android:id="@+id/action_fragmentContainer_to_homeMusic"
+            app:destination="@id/homeMusic" />
+        <action
+            android:id="@+id/action_fragmentContainer_to_fragmentListSong"
             app:destination="@id/fragmentListSong" />
+        <action
+            android:id="@+id/action_fragmentContainer_to_playlistMusic"
+            app:destination="@id/playlistMusic" />
+        <action
+            android:id="@+id/action_fragmentContainer_to_loginMusic"
+            app:destination="@id/loginMusic" />
+        <action
+            android:id="@+id/action_fragmentContainer_to_settingMusic"
+            app:destination="@id/settingMusic" />
+        <action
+            android:id="@+id/action_fragmentContainer_to_songDetailsFragment"
+            app:destination="@id/songDetailsFragment" />
     </fragment>
 </navigation>

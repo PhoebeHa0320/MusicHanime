@@ -21,7 +21,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavGraph;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -62,6 +64,7 @@ public class FragmentListSong extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+
         mNavController =
                 Navigation.findNavController(requireActivity(), R.id.idFragmentContainer);
 //        mRecyclerView = findViewById(R.id.rcy_song);
@@ -69,12 +72,12 @@ public class FragmentListSong extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         listMusicBinding.rcySong.setLayoutManager(linearLayoutManager);
         listMusicBinding.rcySong.setAdapter(mAdapter);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
         mAdapter.setItemClickListener(new SongAdapter.OnItemClickListener() {
             @Override
             public void onClick(View v, Music song, int pos) {
                 listMusicBinding.btnPlayPause.setImageResource(R.drawable.ic_baseline_pause_24);
-                mNavController.navigate(R.id.action_fragmentListSong_to_songDetailsFragment);
+                mNavController.navigate(R.id.action_fragmentContainer_to_songDetailsFragment);
                 Bundle bundle = new Bundle();
                 String titleMusic = song.getTitle();
                 String singer = song.getSinger();
@@ -93,8 +96,10 @@ public class FragmentListSong extends Fragment {
             }
 
         });
+        if (mAdapter.getMusicController().isPlaying()) {
 
-
+            listMusicBinding.btnPlayPause.setImageResource(R.drawable.ic_baseline_pause_24);
+        }
 
         listMusicBinding.btnPlayPause.setOnClickListener(new View.OnClickListener() {
             @Override

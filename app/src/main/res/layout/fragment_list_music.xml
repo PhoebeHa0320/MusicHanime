@@ -6,12 +6,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcy_song"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/controller"
         android:background="@color/white"
-        android:fadeScrollbars="true" />
+        android:fadeScrollbars="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <LinearLayout
         android:id="@+id/controller"
@@ -20,6 +20,8 @@
         android:layout_alignParentBottom="true"
         android:background="@color/white"
         android:orientation="horizontal"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
         android:weightSum="3">
 
         <ImageButton
