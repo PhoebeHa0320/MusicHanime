@@ -58,17 +58,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.library_music, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId() == R.id.add_item){
-//            startActivity(new Intent(this, UploadMusicActivity.class));
-//            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 }

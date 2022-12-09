@@ -53,7 +53,7 @@ MusicController mMusicController;
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Ẩn action barTop;
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
+//        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
 
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
@@ -74,7 +74,7 @@ MusicController mMusicController;
             }
         });
         songdetailsbinding.btnBack.setOnClickListener(v -> {
-            mNavController.navigate(R.id.action_songDetailsFragment_to_fragmentListSong);
+            mNavController.navigate(R.id.action_songDetailsFragment_to_fragmentContainer);
 
         });
 

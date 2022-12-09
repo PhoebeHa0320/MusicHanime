@@ -9,29 +9,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.basicmusic.SongDetailsFragment;
-import com.example.basicmusic.databinding.FragmentListMusicBinding;
-import com.example.basicmusic.databinding.SongFragmentDetailBinding;
+import com.example.basicmusic.databinding.HomeFragmentBinding;
 
-public class LibraryMusic extends Fragment {
-    FragmentListMusicBinding librarybinding;
+public class HomeMusic extends Fragment {
+    HomeFragmentBinding homebinding;
     @Override
-
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        homebinding = HomeFragmentBinding.inflate(inflater,container,false);
+        return homebinding.getRoot();
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-    };
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        librarybinding = FragmentListMusicBinding.inflate(inflater,container,false);
-        return librarybinding.getRoot();
     }
 }
-
