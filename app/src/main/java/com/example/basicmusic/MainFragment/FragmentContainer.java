@@ -3,9 +3,12 @@ package com.example.basicmusic.MainFragment;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +29,8 @@ public class FragmentContainer extends Fragment {
      NavigationView mNavView;
      NavController mNavController;
     FragmentContainerBinding containerbinding;
+    ImageButton btnMore;
+    Menu menu;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +43,8 @@ public class FragmentContainer extends Fragment {
         mNavController =
                 Navigation.findNavController(requireActivity(), R.id.idFragmentContainer);
         drawerLayout = containerbinding.iddrawerlayout;
+        btnMore = containerbinding.btnMore;
+
 //
 //        NavHostFragment navHostFragment =
 //                (NavHostFragment) getActivity().getSupportFragmentManager()
@@ -50,6 +57,7 @@ public class FragmentContainer extends Fragment {
         containerbinding.btnDrawer.setOnClickListener(v->{
             drawerLayout.openDrawer(GravityCompat.START);
         });
+
         mNavView = containerbinding.navView;
         mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -75,6 +83,13 @@ public class FragmentContainer extends Fragment {
         });
 
         return containerbinding.getRoot();
+
+
+    }
+
+    public void onCreateMenuItem(Menu menu) {
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.submenu_item, menu);
 
     }
 

@@ -12,6 +12,7 @@
         android:layout_height="match_parent">
 
         <RelativeLayout
+            android:background="@android:color/white"
             android:id="@+id/appBarlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -28,6 +29,7 @@
                 android:src="@drawable/menu_24" />
 
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
