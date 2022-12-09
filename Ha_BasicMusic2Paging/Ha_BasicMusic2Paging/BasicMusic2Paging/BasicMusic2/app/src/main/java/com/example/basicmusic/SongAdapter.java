@@ -115,6 +115,7 @@ public class SongAdapter extends PagingDataAdapter<Music, SongAdapter.SongViewHo
             mItemView = itemView;
             mAlbumArt = itemView.findViewById(R.id.album_art);
             mTitle = itemView.findViewById(R.id.txt_title);
+
             mSinger= itemView.findViewById(R.id.txt_singer);
             itemView.setOnClickListener(v -> {
                 int lastIndex = mMusicController.getCurrentIndex();
@@ -185,4 +186,5 @@ class MusicComparator extends DiffUtil.ItemCallback<Music> {
                                       @NonNull Music newItem) {
         return oldItem.getId().equals(newItem.getId());
     }
+
 }

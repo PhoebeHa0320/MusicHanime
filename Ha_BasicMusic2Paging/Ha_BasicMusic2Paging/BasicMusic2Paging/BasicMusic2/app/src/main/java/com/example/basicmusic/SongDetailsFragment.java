@@ -1,10 +1,12 @@
 package com.example.basicmusic;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,13 +20,14 @@ import com.example.basicmusic.data.Music;
 import com.example.basicmusic.databinding.FragmentListMusicBinding;
 import com.example.basicmusic.databinding.SongFragmentDetailBinding;
 
+import java.io.StringWriter;
 import java.util.ArrayList;
 
 import phucdv.android.musichelper.Song;
 
 public class SongDetailsFragment extends Fragment {
-    ArrayList<Song> arraySong;
-    int position = 0;
+
+MusicController mMusicController;
     SongFragmentDetailBinding songdetailsbinding;
     NavController mNavController;
     private SongAdapter mAdapter;
@@ -34,12 +37,14 @@ public class SongDetailsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mMusicController = MusicController.getInstance(getContext());
+
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        songdetailsbinding = SongFragmentDetailBinding.inflate(inflater,container,false);
+        songdetailsbinding = SongFragmentDetailBinding.inflate(inflater, container, false);
         return songdetailsbinding.getRoot();
 
     }
@@ -48,14 +53,18 @@ public class SongDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Ẩn action barTop;
-
         ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
 
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
-//        songdetailsbinding.txtTitle.setText(arraySong.);
+
         mNavController =
                 Navigation.findNavController(requireActivity(), R.id.idFragmentContainer);
+//        String titleMusic2 = mMusicController.getData().get(mAdapter.getItemCount()).getTitle();
+        String titleMusic = String.valueOf(mMusicController.getData());
+//                String titleMusic3 = String.valueOf(mMusicController.getData().get(mMusicController.getCurrentIndex()).getTitle());
+        songdetailsbinding.txtTitle.setText(titleMusic);
+
         mAdapter = new SongAdapter(getContext(), new MusicComparator());
         mAdapter.setItemClickListener(new SongAdapter.OnItemClickListener() {
             @Override
@@ -64,7 +73,7 @@ public class SongDetailsFragment extends Fragment {
 
             }
         });
-        songdetailsbinding.btnBack.setOnClickListener(v ->{
+        songdetailsbinding.btnBack.setOnClickListener(v -> {
             mNavController.navigate(R.id.action_songDetailsFragment_to_fragmentListSong);
 
         });
@@ -100,5 +109,6 @@ public class SongDetailsFragment extends Fragment {
             }
         });
     }
+
 
 }
