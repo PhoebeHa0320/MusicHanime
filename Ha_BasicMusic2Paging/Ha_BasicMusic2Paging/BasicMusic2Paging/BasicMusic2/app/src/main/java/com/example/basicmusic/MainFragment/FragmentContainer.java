@@ -65,14 +65,22 @@ public class FragmentContainer extends Fragment {
                 switch (item.getItemId()){
                     case R.id.item_home:
                         mNavController.navigate(R.id.action_fragmentContainer_to_homeMusic);
+                        break;
                     case R.id.item_library:
                         mNavController.navigate(R.id.action_fragmentContainer_to_fragmentListSong);
+                        break;
                     case R.id.item_playlist:
                         mNavController.navigate(R.id.action_fragmentContainer_to_playlistMusic);
+                        break;
                     case R.id.item_login:
                         mNavController.navigate(R.id.action_fragmentContainer_to_loginMusic);
+                        break;
                     case R.id.item_setting:
                         mNavController.navigate(R.id.action_fragmentContainer_to_settingMusic);
+                        break;
+
+
+
 
 
 
