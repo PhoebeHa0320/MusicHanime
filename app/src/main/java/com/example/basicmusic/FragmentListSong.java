@@ -77,7 +77,7 @@ public class FragmentListSong extends Fragment {
             @Override
             public void onClick(View v, Music song, int pos) {
                 listMusicBinding.btnPlayPause.setImageResource(R.drawable.ic_baseline_pause_24);
-                mNavController.navigate(R.id.action_fragmentContainer_to_songDetailsFragment);
+                mNavController.navigate(R.id.action_fragmentListSong_to_songDetailsFragment);
                 Bundle bundle = new Bundle();
                 String titleMusic = song.getTitle();
                 String singer = song.getSinger();

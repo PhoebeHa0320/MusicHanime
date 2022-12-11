@@ -10,6 +10,9 @@
         android:name="com.example.basicmusic.FragmentListSong"
         android:label="FragmentListSong" >
 
+        <action
+            android:id="@+id/action_fragmentListSong_to_songDetailsFragment"
+            app:destination="@id/songDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/songDetailsFragment"
@@ -18,7 +21,8 @@
 
         <action
             android:id="@+id/action_songDetailsFragment_to_fragmentContainer"
-            app:destination="@id/fragmentContainer" />
+            app:destination="@id/fragmentListSong" />
+
     </fragment>
     <fragment
         android:id="@+id/homeMusic"
@@ -55,8 +59,8 @@
         <action
             android:id="@+id/action_fragmentContainer_to_settingMusic"
             app:destination="@id/settingMusic" />
-        <action
-            android:id="@+id/action_fragmentContainer_to_songDetailsFragment"
-            app:destination="@id/songDetailsFragment" />
+<!--        <action-->
+<!--            android:id="@+id/action_fragmentContainer_to_songDetailsFragment"-->
+<!--            app:destination="@id/songDetailsFragment" />-->
     </fragment>
 </navigation>
