@@ -61,7 +61,9 @@ MusicController mMusicController;
         mNavController =
                 Navigation.findNavController(requireActivity(), R.id.idFragmentContainer);
 //        String titleMusic2 = mMusicController.getData().get(mAdapter.getItemCount()).getTitle();
-        String titleMusic = String.valueOf(mMusicController.getData());
+        // PhucDV: - start
+        String titleMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTitle();
+        // PhucDV: - end
 //                String titleMusic3 = String.valueOf(mMusicController.getData().get(mMusicController.getCurrentIndex()).getTitle());
         songdetailsbinding.txtTitle.setText(titleMusic);
 

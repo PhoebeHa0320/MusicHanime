@@ -78,17 +78,19 @@ public class FragmentListSong extends Fragment {
             public void onClick(View v, Music song, int pos) {
                 listMusicBinding.btnPlayPause.setImageResource(R.drawable.ic_baseline_pause_24);
                 mNavController.navigate(R.id.action_fragmentListSong_to_songDetailsFragment);
-                Bundle bundle = new Bundle();
-                String titleMusic = song.getTitle();
-                String singer = song.getSinger();
-                String imageMusic = String.valueOf(song.getAlbumUri());
-                Log.d("title--", "onClick: "+titleMusic);
-
-                bundle.putString("title_music",titleMusic);
-                bundle.putString("url_image",imageMusic);
+                // PhucDV - start
+//                Bundle bundle = new Bundle();
+//                String titleMusic = song.getTitle();
+//                String singer = song.getSinger();
+//                String imageMusic = String.valueOf(song.getAlbumUri());
+//                Log.d("title--", "onClick: "+titleMusic);
+//
+//                bundle.putString("title_music",titleMusic);
+//                bundle.putString("url_image",imageMusic);
                 SongDetailsFragment songDetailsFragment = new SongDetailsFragment();
-                songDetailsFragment.setArguments(bundle);
-                Log.d("databundle", "onClick: "+bundle);
+//                songDetailsFragment.setArguments(bundle);
+//                Log.d("databundle", "onClick: "+bundle);
+                // PhucDV - end
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.containerDetails,songDetailsFragment);
 
 

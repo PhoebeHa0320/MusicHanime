@@ -73,15 +73,11 @@ public class NotificationMusic extends Service {
     }
 
     public void setData(List<Song> songs){
-        mMusicController.setData(songs);
         Intent intent = new Intent(ACTION_DATA_CHANGE);
         LocalBroadcastManager.getInstance(this)
                 .sendBroadcast(intent);
     }
 
-    public List<Song> getData(){
-        return mMusicController.getData();
-    }
 
     public void playSongAt(int index){
         mMusicController.playSongAt(index);
