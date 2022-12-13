@@ -1,5 +1,6 @@
 package com.example.basicmusic.api;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -75,9 +76,11 @@ public interface MusicApi {
             public void onFinish(List<Song> list) {
                 List<Music> musicList = new ArrayList<>();
                 for (Song song : list) {
-                    Music music = new Music(song.getTitle(), "",song.getArtist());
+                    Music music = new Music(song.getTitle(), "",song.getArtist(),song.getAlbumUri(), song.getFormatTimes());
                     music.setId(song.getId() + "");
                     musicList.add(music);
+                    Log.d("times", "onFinish: "+music);
+
                 }
                 listLiveData.setValue(musicList);
             }

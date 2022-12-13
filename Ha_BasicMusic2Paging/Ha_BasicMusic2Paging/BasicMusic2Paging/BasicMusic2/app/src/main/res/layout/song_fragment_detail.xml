@@ -87,6 +87,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/song_progress"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginEnd="-1dp"
                     android:text="05:00"
                     android:textColor="@color/black" />
 
@@ -97,17 +99,17 @@
                     android:layout_alignParentEnd="true"
                     android:background="@android:color/transparent"
                     android:padding="10dp"
-                    android:src="@drawable/ic_baseline_shuffle_24"
+                    android:src="@drawable/ic_baseline_sync_alt_24"
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
                     android:id="@+id/btn_sync"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/btn_shuffle"
+                    android:layout_toStartOf="@id/btn_shuffle"
                     android:background="@android:color/transparent"
                     android:padding="10dp"
-                    android:src="@drawable/ic_baseline_sync_alt_24"
+                    android:src="@drawable/ic_baseline_shuffle_24"
                     tools:ignore="SpeakableTextPresentCheck" />
 
             </RelativeLayout>

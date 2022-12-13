@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             drawerLayout.openDrawer(GravityCompat.START);
         });
 
+
         mNavView = binding.navView;
         mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
