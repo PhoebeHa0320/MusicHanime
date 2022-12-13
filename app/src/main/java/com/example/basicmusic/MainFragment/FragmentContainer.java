@@ -25,12 +25,13 @@ import com.example.basicmusic.databinding.FragmentContainerBinding;
 import com.google.android.material.navigation.NavigationView;
 
 public class FragmentContainer extends Fragment {
-     DrawerLayout drawerLayout;
-     NavigationView mNavView;
-     NavController mNavController;
+    DrawerLayout drawerLayout;
+    NavigationView mNavView;
+    NavController mNavController;
     FragmentContainerBinding containerbinding;
     ImageButton btnMore;
     Menu menu;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +40,7 @@ public class FragmentContainer extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        containerbinding = FragmentContainerBinding.inflate(inflater,container,false);
+        containerbinding = FragmentContainerBinding.inflate(inflater, container, false);
         mNavController =
                 Navigation.findNavController(requireActivity(), R.id.idFragmentContainer);
         drawerLayout = containerbinding.iddrawerlayout;
@@ -54,41 +55,36 @@ public class FragmentContainer extends Fragment {
 //                        .getNavInflater().inflate(R.navigation.main_nav);
 //        navHostFragment.getNavController().setGraph(navGraph);
 
-        containerbinding.btnDrawer.setOnClickListener(v->{
+        containerbinding.btnDrawer.setOnClickListener(v -> {
             drawerLayout.openDrawer(GravityCompat.START);
         });
 
         mNavView = containerbinding.navView;
-        mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.item_home:
-                        mNavController.navigate(R.id.action_fragmentContainer_to_homeMusic);
-                        break;
-                    case R.id.item_library:
-                        mNavController.navigate(R.id.action_fragmentContainer_to_fragmentListSong);
-                        break;
-                    case R.id.item_playlist:
-                        mNavController.navigate(R.id.action_fragmentContainer_to_playlistMusic);
-                        break;
-                    case R.id.item_login:
-                        mNavController.navigate(R.id.action_fragmentContainer_to_loginMusic);
-                        break;
-                    case R.id.item_setting:
-                        mNavController.navigate(R.id.action_fragmentContainer_to_settingMusic);
-                        break;
-
-
-
-
-
-
-
-                }
-                return  true;
-            }
-        });
+//        mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId()) {
+//                    case R.id.item_home:
+//                        mNavController.navigate(R.id.action_fragmentContainer_to_homeMusic);
+//                        break;
+//                    case R.id.item_library:
+//                        mNavController.navigate(R.id.action_fragmentContainer_to_fragmentListSong);
+//                        break;
+//                    case R.id.item_playlist:
+//                        mNavController.navigate(R.id.action_fragmentContainer_to_playlistMusic);
+//                        break;
+//                    case R.id.item_login:
+//                        mNavController.navigate(R.id.action_fragmentContainer_to_loginMusic);
+//                        break;
+//                    case R.id.item_setting:
+//                        mNavController.navigate(R.id.action_fragmentContainer_to_settingMusic);
+//                        break;
+//
+//
+//                }
+//                return true;
+//            }
+//        });
 
         return containerbinding.getRoot();
 

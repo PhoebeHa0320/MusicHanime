@@ -24,10 +24,22 @@ public class Music {
     @Expose
     private String data;
 
-    public Music(String title, String data, String singer) {
+    @SerializedName("albumUri")
+    @Expose
+    private Uri albumUri;
+
+    @SerializedName("times")
+    @Expose
+    private String times;
+
+
+
+    public Music(String title, String data, String singer, Uri albumUri, String timesMusic ) {
         this.title = title;
         this.data = data;
         this.singer = singer;
+        this.albumUri = albumUri;
+        this.times = timesMusic;
     }
 
     public String getSinger() {
@@ -62,6 +74,18 @@ public class Music {
         this.data = data;
     }
 
+    public void setAlbumUri(Uri albumUri) {
+        this.albumUri = albumUri;
+    }
+
+    public String getTimes() {
+        return times;
+    }
+
+    public void setTimes(String times) {
+        this.times = times;
+    }
+
     @Override
     public String toString() {
         return "Music{" +
@@ -75,6 +99,8 @@ public class Music {
     public Uri getAlbumUri(Uri albumUri) {
         return albumUri;
     }
+
+
 
     public Uri getAlbumUri() {
         return null ;

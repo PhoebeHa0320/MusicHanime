@@ -1,11 +1,14 @@
 package com.example.basicmusic;
 
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,15 +25,23 @@ import com.example.basicmusic.databinding.SongFragmentDetailBinding;
 
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import phucdv.android.musichelper.Song;
 
 public class SongDetailsFragment extends Fragment {
 
+
+
 MusicController mMusicController;
     SongFragmentDetailBinding songdetailsbinding;
     NavController mNavController;
     private SongAdapter mAdapter;
+    MediaPlayer mediaPlayer;
+
+    SeekBar seekBar;
+
+
 
     private MainActivityViewModel mViewModel;
 
@@ -38,6 +49,7 @@ MusicController mMusicController;
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mMusicController = MusicController.getInstance(getContext());
+
 
     }
 
@@ -47,6 +59,7 @@ MusicController mMusicController;
         songdetailsbinding = SongFragmentDetailBinding.inflate(inflater, container, false);
         return songdetailsbinding.getRoot();
 
+
     }
 
     @Override
@@ -55,15 +68,44 @@ MusicController mMusicController;
         // Ẩn action barTop;
 //        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
 
+        seekBar = songdetailsbinding.songProgress;
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+//                mediaPlayer.seekTo(seekBar.getProgress());
+
+
+            }
+        });
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
 
         mNavController =
                 Navigation.findNavController(requireActivity(), R.id.idFragmentContainer);
-//        String titleMusic2 = mMusicController.getData().get(mAdapter.getItemCount()).getTitle();
-        String titleMusic = String.valueOf(mMusicController.getData());
-//                String titleMusic3 = String.valueOf(mMusicController.getData().get(mMusicController.getCurrentIndex()).getTitle());
+        //  - start
+        String timeCurrent = String.valueOf(TimeUnit.MINUTES.toMinutes(System.currentTimeMillis()));
+   String titleMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTitle();
+//   String timeMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTimes();
+        Uri imageMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getAlbumUri();
+
+
+
+
+        //  - end
         songdetailsbinding.txtTitle.setText(titleMusic);
+        songdetailsbinding.albumArt.setImageURI(imageMusic);
+//        songdetailsbinding.txtDuration.setText(timeMusic);
+        setTimeTotal();
+        songdetailsbinding.txtCurrentTime.setText(timeCurrent);
 
         mAdapter = new SongAdapter(getContext(), new MusicComparator());
         mAdapter.setItemClickListener(new SongAdapter.OnItemClickListener() {
@@ -97,7 +139,14 @@ MusicController mMusicController;
             @Override
             public void onClick(View v) {
                 mAdapter.playNext();
+                String titleMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTitle();
+//                String timeMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTimes();
+//                songdetailsbinding.txtDuration.setText(timeMusic);
+                setTimeTotal();
+                songdetailsbinding.txtTitle.setText(titleMusic);
                 songdetailsbinding.btnPlayPause.setImageResource(R.drawable.ic_baseline_pause_24);
+
+
             }
         });
 
@@ -105,10 +154,24 @@ MusicController mMusicController;
             @Override
             public void onClick(View v) {
                 mAdapter.playPrev();
+                String   titleMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTitle();
+//                String timeMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTimes();
+//                songdetailsbinding.txtDuration.setText(timeMusic);
+                setTimeTotal();
+                songdetailsbinding.txtTitle.setText(titleMusic);
                 songdetailsbinding.btnPlayPause.setImageResource(R.drawable.ic_baseline_pause_24);
             }
         });
     }
+    private void setTimeTotal(){
+      String timeMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTimes();
+       songdetailsbinding.txtDuration.setText(timeMusic);
+
+//        seekBar.setMax(  Integer.parseInt(timeMusic));
+
+
+    }
+
 
 
 }

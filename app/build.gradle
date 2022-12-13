@@ -1,7 +1,11 @@
 plugins {
     id 'com.android.application'
 }
-
+//
+//def gitCommits = 'git rev-list --all --count'.execute([],
+//        rootDir).text.trim().toInteger()
+//
+//def timestamp = new Date().getTime()
 android {
     compileSdk 32
 
