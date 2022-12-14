@@ -22,6 +22,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.basicmusic.MusicController;
 import com.example.basicmusic.NotificationMusic;
 import com.example.basicmusic.R;
 import com.example.basicmusic.SongAdapter;
@@ -35,7 +36,7 @@ import phucdv.android.musichelper.Song;
 public class NotificationActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private SongAdapter mAdapter;
-
+    MusicController mMusicController;
     private ImageButton mPrev;
     private ImageButton mPlayPause;
     private ImageButton mNext;
@@ -60,9 +61,9 @@ public class NotificationActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            switch (action){
+            switch (action) {
 //                case NotificationMusic.ACTION_DATA_CHANGE:
-//                    mAdapter.setData(mNotificationMusic.getData());
+//                    mAdapter.setData(mNotificationMusic.getCurrentIndex());
 //                    break;
                 case NotificationMusic.ACTION_PLAY_AT:
                     mPlayPause.setImageResource(R.drawable.ic_baseline_pause_24);
@@ -83,7 +84,7 @@ public class NotificationActivity extends AppCompatActivity {
         }
     };
 
-    private void checkPermission(){
+    private void checkPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 999);
         } else {
@@ -116,7 +117,7 @@ public class NotificationActivity extends AppCompatActivity {
         mPlayPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mNotificationMusic.getMusicController().getCurrentIndex() >= 0) {
+                if (mNotificationMusic.getMusicController().getCurrentIndex() >= 0) {
                     if (mNotificationMusic.getMusicController().isPlaying()) {
                         mNotificationMusic.pause();
                     } else {
@@ -159,14 +160,14 @@ public class NotificationActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == 999) {
+        if (requestCode == 999) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 doRetrieveAllSong();
             }
         }
     }
 
-    private void doRetrieveAllSong(){
+    private void doRetrieveAllSong() {
         MediaHelper.retrieveAllSong(this, new MediaHelper.OnFinishRetrieve() {
             @Override
             public void onFinish(List<Song> list) {

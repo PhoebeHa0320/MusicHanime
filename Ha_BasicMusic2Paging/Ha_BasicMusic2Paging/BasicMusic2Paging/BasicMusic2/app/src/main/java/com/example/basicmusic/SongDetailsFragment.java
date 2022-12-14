@@ -1,9 +1,15 @@
 package com.example.basicmusic;
 
+import android.content.ContentUris;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -141,17 +147,25 @@ public class SongDetailsFragment extends Fragment {
     private void setDateTotal() {
 //        String timeCurrent = String.valueOf(TimeUnit.MINUTES.toMinutes(System.currentTimeMillis()));
         String titleMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTitle();
-        Uri imageMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getAlbumUri();
         String timeMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTimes();
         songdetailsbinding.txtTitle.setText(titleMusic);
-        songdetailsbinding.albumArt.setImageURI(imageMusic);
         songdetailsbinding.txtDuration.setText(timeMusic);
-//        songdetailsbinding.txtCurrentTime.setText(timeCurrent);
-
+//        songdetailsbinding.txtCurrentTime.setText(timeCurrent)
 //        seekBar.setMax(  Integer.parseInt(timeMusic));
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Uri trackUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, Long.parseLong(mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getId()));
+            try {
+                Bitmap bitmap = getActivity().getContentResolver().loadThumbnail(trackUri, new Size(500, 500), null);
+                songdetailsbinding.albumArt.setImageBitmap(bitmap);
+            } catch (Exception e) {
+            }
+        } else {
+            songdetailsbinding.albumArt.setImageURI(mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getAlbumUri());
+        }
+    }
 
     }
 
 
-}
+
+
