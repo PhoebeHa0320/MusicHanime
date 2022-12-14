@@ -62,6 +62,10 @@ public class NotificationMusic extends Service {
         stopForeground(true);
     }
 
+//    public List<Music> getData() {
+//        return mMusicController.getCurrentIndex();
+//    }
+
     public class MusicServiceBinder extends Binder {
         public NotificationMusic getService(){
             return NotificationMusic.this;
@@ -87,6 +91,7 @@ public class NotificationMusic extends Service {
     }
 
     public int getCurrentIndex(){
+
         return mMusicController.getCurrentIndex();
     }
 

@@ -1,9 +1,15 @@
 package com.example.basicmusic;
 
+import android.content.ContentUris;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
+import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,15 +38,13 @@ import phucdv.android.musichelper.Song;
 public class SongDetailsFragment extends Fragment {
 
 
-
-MusicController mMusicController;
+    MusicController mMusicController;
     SongFragmentDetailBinding songdetailsbinding;
     NavController mNavController;
     private SongAdapter mAdapter;
     MediaPlayer mediaPlayer;
 
     SeekBar seekBar;
-
 
 
     private MainActivityViewModel mViewModel;
@@ -87,26 +91,10 @@ MusicController mMusicController;
 
             }
         });
+        setDateTotal();
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
-
         mNavController =
                 Navigation.findNavController(requireActivity(), R.id.idFragmentContainer);
-        //  - start
-        String timeCurrent = String.valueOf(TimeUnit.MINUTES.toMinutes(System.currentTimeMillis()));
-   String titleMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTitle();
-//   String timeMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTimes();
-        Uri imageMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getAlbumUri();
-
-
-
-
-        //  - end
-        songdetailsbinding.txtTitle.setText(titleMusic);
-        songdetailsbinding.albumArt.setImageURI(imageMusic);
-//        songdetailsbinding.txtDuration.setText(timeMusic);
-        setTimeTotal();
-        songdetailsbinding.txtCurrentTime.setText(timeCurrent);
-
         mAdapter = new SongAdapter(getContext(), new MusicComparator());
         mAdapter.setItemClickListener(new SongAdapter.OnItemClickListener() {
             @Override
@@ -138,12 +126,8 @@ MusicController mMusicController;
         songdetailsbinding.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAdapter.playNext();
-                String titleMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTitle();
-//                String timeMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTimes();
-//                songdetailsbinding.txtDuration.setText(timeMusic);
-                setTimeTotal();
-                songdetailsbinding.txtTitle.setText(titleMusic);
+                mAdapter.playNext();;
+                setDateTotal();
                 songdetailsbinding.btnPlayPause.setImageResource(R.drawable.ic_baseline_pause_24);
 
 
@@ -154,24 +138,34 @@ MusicController mMusicController;
             @Override
             public void onClick(View v) {
                 mAdapter.playPrev();
-                String   titleMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTitle();
-//                String timeMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTimes();
-//                songdetailsbinding.txtDuration.setText(timeMusic);
-                setTimeTotal();
-                songdetailsbinding.txtTitle.setText(titleMusic);
+                setDateTotal();
                 songdetailsbinding.btnPlayPause.setImageResource(R.drawable.ic_baseline_pause_24);
             }
         });
     }
-    private void setTimeTotal(){
-      String timeMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTimes();
-       songdetailsbinding.txtDuration.setText(timeMusic);
 
+    private void setDateTotal() {
+//        String timeCurrent = String.valueOf(TimeUnit.MINUTES.toMinutes(System.currentTimeMillis()));
+        String titleMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTitle();
+        String timeMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTimes();
+        songdetailsbinding.txtTitle.setText(titleMusic);
+        songdetailsbinding.txtDuration.setText(timeMusic);
+//        songdetailsbinding.txtCurrentTime.setText(timeCurrent)
 //        seekBar.setMax(  Integer.parseInt(timeMusic));
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Uri trackUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, Long.parseLong(mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getId()));
+            try {
+                Bitmap bitmap = getActivity().getContentResolver().loadThumbnail(trackUri, new Size(500, 500), null);
+                songdetailsbinding.albumArt.setImageBitmap(bitmap);
+            } catch (Exception e) {
+            }
+        } else {
+            songdetailsbinding.albumArt.setImageURI(mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getAlbumUri());
+        }
+    }
 
     }
 
 
 
-}
+
