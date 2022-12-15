@@ -138,4 +138,15 @@ public class MusicController {
         mIsPreparing = true;
     }
 
+    public long getDuration(){
+        return mMusicSource.getAtIndex(mCurrentIndex).getDuration();
+    }
+
+    public int getCurrentTimePos(){
+        return mMediaPlayer.getCurrentPosition();
+    }
+
+    public void seekTo(int pos){
+        mMediaPlayer.seekTo(pos);
+    }
 }

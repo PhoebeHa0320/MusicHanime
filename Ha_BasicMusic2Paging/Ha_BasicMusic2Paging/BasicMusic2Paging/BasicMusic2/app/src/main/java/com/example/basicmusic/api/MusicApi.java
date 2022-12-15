@@ -76,7 +76,7 @@ public interface MusicApi {
             public void onFinish(List<Song> list) {
                 List<Music> musicList = new ArrayList<>();
                 for (Song song : list) {
-                    Music music = new Music(song.getTitle(), "",song.getArtist(),song.getAlbumUri(), song.getFormatTimes());
+                    Music music = new Music(song.getTitle(), "",song.getArtist(),song.getAlbumUri(), song.getFormatTimes(), song.getMillisTimes());
                     music.setId(song.getId() + "");
                     musicList.add(music);
                     Log.d("times", "onFinish: "+music);

@@ -7,6 +7,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.util.Size;
@@ -49,6 +50,20 @@ public class SongDetailsFragment extends Fragment {
 
     private MainActivityViewModel mViewModel;
 
+    private Runnable mUpdateRunable = new Runnable() {
+        @Override
+        public void run() {
+            updateForSeconds();
+            mHandler.postDelayed(mUpdateRunable, 1000);
+        }
+    };
+    private Handler mHandler = new Handler();
+
+    private void updateForSeconds(){
+        // PhucDV: TODO xử lý update các view sau mỗi giây tại đây VD: update text thời gian đang phát, thời gian còn lại
+        seekBar.setProgress(mMusicController.getCurrentTimePos());
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,8 +102,7 @@ public class SongDetailsFragment extends Fragment {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 //                mediaPlayer.seekTo(seekBar.getProgress());
-
-
+                mMusicController.seekTo(seekBar.getProgress());
             }
         });
         setDateTotal();
@@ -126,7 +140,8 @@ public class SongDetailsFragment extends Fragment {
         songdetailsbinding.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAdapter.playNext();;
+                mAdapter.playNext();
+
                 setDateTotal();
                 songdetailsbinding.btnPlayPause.setImageResource(R.drawable.ic_baseline_pause_24);
 
@@ -142,6 +157,8 @@ public class SongDetailsFragment extends Fragment {
                 songdetailsbinding.btnPlayPause.setImageResource(R.drawable.ic_baseline_pause_24);
             }
         });
+
+        mHandler.postDelayed(mUpdateRunable, 1000);
     }
 
     private void setDateTotal() {
@@ -150,6 +167,8 @@ public class SongDetailsFragment extends Fragment {
         String timeMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTimes();
         songdetailsbinding.txtTitle.setText(titleMusic);
         songdetailsbinding.txtDuration.setText(timeMusic);
+        seekBar.setMax((int) mMusicController.getDuration());
+        seekBar.setProgress(0);
 //        songdetailsbinding.txtCurrentTime.setText(timeCurrent)
 //        seekBar.setMax(  Integer.parseInt(timeMusic));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -164,7 +183,7 @@ public class SongDetailsFragment extends Fragment {
         }
     }
 
-    }
+}
 
 
 
