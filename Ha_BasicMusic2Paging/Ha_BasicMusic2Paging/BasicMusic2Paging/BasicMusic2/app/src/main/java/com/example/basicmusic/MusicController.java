@@ -42,7 +42,6 @@ public class MusicController {
 
     public interface MusicSource {
         int getSize();
-
         Music getAtIndex(int index);
     }
 
@@ -149,4 +148,26 @@ public class MusicController {
     public void seekTo(int pos){
         mMediaPlayer.seekTo(pos);
     }
+
+    public void deleteMusic(int pos){
+
+    }
+
+    public void setOnCompletionListener(){
+        mMediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                if (mMusicSource.getSize() != 0) {
+                    if (mCurrentIndex < mMusicSource.getSize() - 1) {
+                        mCurrentIndex++;
+                    } else {
+                        mCurrentIndex = 0;
+                    }
+                    playSongAt(mCurrentIndex);
+                }
+            }
+        });
+    }
+
+
 }

@@ -1,4 +1,4 @@
-package com.example.basicmusic;
+package com.example.basicmusic.Notification;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -14,6 +14,9 @@ import android.widget.RemoteViews;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import com.example.basicmusic.MusicController;
+import com.example.basicmusic.R;
 
 import java.util.List;
 

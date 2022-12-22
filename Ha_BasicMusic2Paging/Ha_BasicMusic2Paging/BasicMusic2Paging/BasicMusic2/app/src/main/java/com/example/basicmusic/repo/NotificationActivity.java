@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.basicmusic.MusicController;
-import com.example.basicmusic.NotificationMusic;
+import com.example.basicmusic.Notification.NotificationMusic;
 import com.example.basicmusic.R;
 import com.example.basicmusic.SongAdapter;
 import com.example.basicmusic.data.Music;

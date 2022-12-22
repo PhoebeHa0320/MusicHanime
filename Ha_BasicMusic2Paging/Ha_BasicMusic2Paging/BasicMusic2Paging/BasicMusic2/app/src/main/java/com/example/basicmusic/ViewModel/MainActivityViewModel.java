@@ -1,4 +1,4 @@
-package com.example.basicmusic;
+package com.example.basicmusic.ViewModel;
 
 import android.content.Context;
 

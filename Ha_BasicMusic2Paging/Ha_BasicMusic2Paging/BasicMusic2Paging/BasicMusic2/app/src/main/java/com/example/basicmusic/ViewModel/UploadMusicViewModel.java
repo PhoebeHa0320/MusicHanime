@@ -1,4 +1,4 @@
-package com.example.basicmusic;
+package com.example.basicmusic.ViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;

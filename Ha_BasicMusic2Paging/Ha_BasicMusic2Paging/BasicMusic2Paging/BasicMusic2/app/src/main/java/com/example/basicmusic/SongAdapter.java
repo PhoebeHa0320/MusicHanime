@@ -1,21 +1,18 @@
 package com.example.basicmusic;
 
-import android.app.Dialog;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.util.Size;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,12 +25,9 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.basicmusic.data.Music;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import phucdv.android.musichelper.Song;
 
 public class SongAdapter extends PagingDataAdapter<Music, SongAdapter.SongViewHolder> {
     private final Context mContext;
@@ -50,6 +44,7 @@ public class SongAdapter extends PagingDataAdapter<Music, SongAdapter.SongViewHo
             public int getSize() {
                 return getItemCount();
             }
+
 
             @Override
             public Music getAtIndex(int index) {
@@ -115,6 +110,7 @@ public class SongAdapter extends PagingDataAdapter<Music, SongAdapter.SongViewHo
     private void ShowOptionMoreDiaglog(MusicController mMusicController, SongViewHolder holder) {
         String[] Option = {"Thêm Playlist","Thêm Vào mục yêu thích","Xoá "};
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+
         alertDialog.setTitle("Choose Option")
 
                 .setIcon(R.drawable.home_24)
@@ -123,10 +119,12 @@ public class SongAdapter extends PagingDataAdapter<Music, SongAdapter.SongViewHo
                     public void onClick(DialogInterface dialog, int item) {
                         if(item ==0){
                             Toast.makeText(mContext, "OnClick Playlist", Toast.LENGTH_SHORT).show();
+
                         }else if(item==1){
                             Toast.makeText(mContext, "OnClick Mục yêu thích", Toast.LENGTH_SHORT).show();
                         }else if(item ==2){
                             Toast.makeText(mContext, "OnClick Delete", Toast.LENGTH_SHORT).show();
+
 
                         }
                     }
