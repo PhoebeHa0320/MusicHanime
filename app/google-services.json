@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "985379185462",
+    "firebase_url": "https://basic-music-11e54-default-rtdb.firebaseio.com",
+    "project_id": "basic-music-11e54",
+    "storage_bucket": "basic-music-11e54.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:985379185462:android:ef6446552e8a9801c64997",
+        "android_client_info": {
+          "package_name": "com.example.basicmusic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "985379185462-u4gssbhgkm2dn04dlpi4n7m3408t3hov.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwSpzE_snNzZFBpYMexXUdBQK_1n0y_ZQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "985379185462-u4gssbhgkm2dn04dlpi4n7m3408t3hov.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

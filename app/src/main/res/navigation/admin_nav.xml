@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/admin_nav"
+    app:startDestination="@id/homeAdmin">
+
+    <fragment
+        android:id="@+id/homeAdmin"
+        android:name="com.example.basicmusic.Admin.FragmentAdmin.homeAdmin"
+        android:label="homeAdmin" >
+        <action
+            android:id="@+id/action_homeAdmin_to_addCategoryMusic"
+            app:destination="@id/addCategoryMusic" />
+        <action
+            android:id="@+id/action_homeAdmin_to_addFileMp32"
+            app:destination="@id/addFileMp32" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCategoryMusic"
+        android:name="com.example.basicmusic.Admin.FragmentAdmin.AddCategoryMusic"
+        android:label="AddCategoryMusic" />
+    <fragment
+        android:id="@+id/addFileMp32"
+        android:name="com.example.basicmusic.Admin.FragmentAdmin.addFileMp3"
+        android:label="addFileMp3" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.basicmusic.MainActivity"
+        android:label="MainActivity" />
+</navigation>
