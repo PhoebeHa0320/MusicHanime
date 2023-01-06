@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/containerfileMp3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:background="@drawable/shape_add_category"
+        >
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_margin="10dp"
+            android:src="@drawable/back_24"
+            />
+        <TextView
+            android:id="@+id/tvTitleCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thêm File Mp3"
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            />
+        <ImageView
+            android:id="@+id/imgCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/mpzing"
+            android:layout_below="@id/tvTitleCategory"
+            android:layout_marginTop="8dp"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_category_center"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="20dp"
+        android:layout_above="@id/btnUpFileMp3"
+        >
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên bài hát"
+            android:layout_margin="10dp"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTitleMusic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_Categories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên Thể Loại"
+            android:layout_below="@id/layout_Title"
+            android:layout_margin="10dp"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTitleCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_Singer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="Tên Nghệ sĩ"
+            android:layout_below="@id/layout_Categories"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTitleSinger"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <ImageView
+            android:id="@+id/imgSimger"
+            android:layout_width="120dp"
+            android:layout_height="140dp"
+            android:layout_marginStart="40dp"
+            android:background="@drawable/shape_login_background"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/layout_Singer"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chọn ảnh"
+            android:layout_toEndOf="@id/imgSimger"
+            android:layout_below="@id/layout_Singer"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="60dp"
+            />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnUpFileMp3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_buton"
+        android:text="Cập Nhật Bài Hát"
+        android:textColor="@color/black" />
+</RelativeLayout>

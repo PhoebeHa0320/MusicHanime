@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cateloryMusic"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:background="@drawable/shape_add_category"
+        >
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_margin="10dp"
+            android:src="@drawable/back_24"
+            />
+        <TextView
+            android:id="@+id/tvTitleCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thêm Thể Loại Nhạc"
+            android:textSize="18sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            />
+        <ImageView
+            android:id="@+id/imgCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/listmp"
+            android:layout_below="@id/tvTitleCategory"
+            android:layout_marginTop="8dp"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_category_center"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginEnd="20dp"
+        android:layout_above="@id/btnUpCategory"
+        >
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layout_Category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên Thể Loại"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTitleMusic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageView
+            android:id="@+id/imgSimger"
+            android:layout_width="240dp"
+            android:layout_height="240dp"
+            android:layout_marginStart="40dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/shape_login_background"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/layout_Category"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chọn ảnh"
+            android:layout_below="@id/imgSimger"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+    <Button
+        android:id="@+id/btnUpCategory"
+        android:text="Cập Nhật Thể Loại"
+        android:layout_width="match_parent"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_buton"
+        />
+
+
+</RelativeLayout>
