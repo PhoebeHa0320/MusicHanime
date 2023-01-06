@@ -3,37 +3,31 @@ package com.example.basicmusic;
 import android.content.ContentUris;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.icu.text.Normalizer2;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.SeekBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.basicmusic.ViewModel.MainActivityViewModel;
 import com.example.basicmusic.data.Music;
-import com.example.basicmusic.databinding.FragmentListMusicBinding;
 import com.example.basicmusic.databinding.SongFragmentDetailBinding;
 
-import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-
-import phucdv.android.musichelper.Song;
+import java.text.SimpleDateFormat;
 
 public class SongDetailsFragment extends Fragment {
 
@@ -48,6 +42,27 @@ public class SongDetailsFragment extends Fragment {
 
 
     private MainActivityViewModel mViewModel;
+
+    private Runnable mUpdateRunable = new Runnable() {
+        @Override
+        public void run() {
+            updateForSeconds();
+// lẤY CURRENTIME -- SEEKBAR + Update progress skSong
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("m:ss");
+            songdetailsbinding.txtCurrentTime.setText(simpleDateFormat.format(mMusicController.getCurrentTimePos()));
+            mHandler.postDelayed(mUpdateRunable, 1000);
+            // Kiểm tra thời gian bài hát => nếu kết thúc => nẽt;
+            mMusicController.setOnCompletionListener();
+            setDateTotal();
+        }
+
+    };
+    private Handler mHandler = new Handler();
+
+    private void updateForSeconds() {
+        // PhucDV: TODO xử lý update các view sau mỗi giây tại đây VD: update text thời gian đang phát, thời gian còn lại
+        seekBar.setProgress(mMusicController.getCurrentTimePos());
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,12 +101,11 @@ public class SongDetailsFragment extends Fragment {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-//                mediaPlayer.seekTo(seekBar.getProgress());
-
-
+                mMusicController.seekTo(seekBar.getProgress());
             }
         });
         setDateTotal();
+        setTimeTotal();
         mViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         mNavController =
                 Navigation.findNavController(requireActivity(), R.id.idFragmentContainer);
@@ -126,8 +140,9 @@ public class SongDetailsFragment extends Fragment {
         songdetailsbinding.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAdapter.playNext();;
+                mAdapter.playNext();
                 setDateTotal();
+                setTimeTotal();
                 songdetailsbinding.btnPlayPause.setImageResource(R.drawable.ic_baseline_pause_24);
 
 
@@ -139,19 +154,25 @@ public class SongDetailsFragment extends Fragment {
             public void onClick(View v) {
                 mAdapter.playPrev();
                 setDateTotal();
+                setTimeTotal();
                 songdetailsbinding.btnPlayPause.setImageResource(R.drawable.ic_baseline_pause_24);
             }
         });
+
+        mHandler.postDelayed(mUpdateRunable, 1000);
     }
 
+    private void setTimeTotal(){
+        seekBar.setMax((int) mMusicController.getDuration());
+        seekBar.setProgress(0);
+    }
     private void setDateTotal() {
-//        String timeCurrent = String.valueOf(TimeUnit.MINUTES.toMinutes(System.currentTimeMillis()));
         String titleMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTitle();
         String timeMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTimes();
         songdetailsbinding.txtTitle.setText(titleMusic);
         songdetailsbinding.txtDuration.setText(timeMusic);
-//        songdetailsbinding.txtCurrentTime.setText(timeCurrent)
-//        seekBar.setMax(  Integer.parseInt(timeMusic));
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             Uri trackUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, Long.parseLong(mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getId()));
             try {
@@ -164,7 +185,7 @@ public class SongDetailsFragment extends Fragment {
         }
     }
 
-    }
+}
 
 
 

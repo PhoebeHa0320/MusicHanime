@@ -32,7 +32,7 @@ public class Music {
     @Expose
     private String times;
 
-
+    private long duration;
 
     public Music(String title, String data, String singer, Uri albumUri, String timesMusic ) {
         this.title = title;
@@ -40,6 +40,15 @@ public class Music {
         this.singer = singer;
         this.albumUri = albumUri;
         this.times = timesMusic;
+    }
+
+    public Music(String title, String data, String singer, Uri albumUri, String timesMusic, long duration) {
+        this.title = title;
+        this.data = data;
+        this.singer = singer;
+        this.albumUri = albumUri;
+        this.times = timesMusic;
+        this.duration = duration;
     }
 
     public String getSinger() {
@@ -104,5 +113,13 @@ public class Music {
 
     public Uri getAlbumUri() {
         return null ;
+    }
+
+    public long getDuration() {
+        return duration;
+    }
+
+    public void setDuration(long duration) {
+        this.duration = duration;
     }
 }

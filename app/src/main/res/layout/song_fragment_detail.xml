@@ -11,9 +11,9 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/white"
             android:orientation="vertical"
             android:weightSum="100">
 
@@ -25,12 +25,12 @@
                 android:background="@color/white">
 
                 <ImageView
-                    android:src="@drawable/unnamed"
                     android:id="@+id/album_art"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/white"
-                    android:scaleType="centerCrop" />
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/unnamed" />
 
                 <ImageButton
                     android:id="@+id/btnBack"
@@ -50,8 +50,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="75"
-               >
+                android:layout_weight="75">
 
                 <TextView
                     android:id="@+id/txt_title"
@@ -71,6 +70,7 @@
                     android:layout_below="@id/btn_shuffle"
                     android:padding="10dp"
                     android:progress="20"
+                    android:progressBackgroundTint="@color/black"
                     android:tag="tint_accent_color" />
 
                 <TextView
@@ -78,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/song_progress"
-                    android:text="00:00"
+                    android:text="0:00"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -89,7 +89,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="1dp"
                     android:layout_marginEnd="-1dp"
-                    android:text="05:00"
+                    android:text="5:00"
                     android:textColor="@color/black" />
 
                 <ImageButton

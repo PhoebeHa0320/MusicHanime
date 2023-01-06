@@ -1,11 +1,9 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
-//
-//def gitCommits = 'git rev-list --all --count'.execute([],
-//        rootDir).text.trim().toInteger()
-//
-//def timestamp = new Date().getTime()
+
+
 android {
     compileSdk 32
 
@@ -58,6 +56,12 @@ dependencies {
     implementation 'com.uber.autodispose2:autodispose-androidx-lifecycle:2.1.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
     implementation 'io.reactivex.rxjava3:rxjava:3.1.0'
+
+    //firebase
+    implementation 'com.google.firebase:firebase-analytics:21.1.0'
+    implementation 'com.google.firebase:firebase-auth:21.0.7'
+    implementation 'com.google.firebase:firebase-database:20.0.5'
+    implementation 'com.google.firebase:firebase-storage:20.0.1'
 
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'

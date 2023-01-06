@@ -35,11 +35,23 @@
     <fragment
         android:id="@+id/loginMusic"
         android:name="com.example.basicmusic.MainFragment.LoginMusic"
-        android:label="LoginMusic" />
+        android:label="LoginMusic" >
+        <action
+            android:id="@+id/action_loginMusic_to_registerMusic"
+            app:destination="@id/registerMusic" />
+    </fragment>
     <fragment
         android:id="@+id/settingMusic"
         android:name="com.example.basicmusic.MainFragment.SettingMusic"
         android:label="SettingMusic" />
+    <fragment
+        android:id="@+id/registerMusic"
+        android:name="com.example.basicmusic.MainFragment.Register"
+        android:label="Register" >
+        <action
+            android:id="@+id/action_registerMusic_to_loginMusic"
+            app:destination="@id/loginMusic" />
+    </fragment>
 <!--    <fragment-->
 <!--        android:id="@+id/fragmentContainer"-->
 <!--        android:name="com.example.basicmusic.MainFragment.FragmentContainer"-->
