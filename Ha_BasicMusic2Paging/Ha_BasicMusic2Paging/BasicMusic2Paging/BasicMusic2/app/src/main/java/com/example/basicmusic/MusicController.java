@@ -128,7 +128,7 @@ public class MusicController {
             if (index == mCurrentIndex) {
                 mCurrentIndex = index - 1;
             }
-            mCurrentIndex = index;
+            playSongAt(mCurrentIndex);
         }
         if (mCurrentIndex > (mMusicSource.getSize() - 1)) {
             mCurrentIndex = 0;
@@ -155,9 +155,8 @@ public class MusicController {
             if (index == mCurrentIndex) {
                 mCurrentIndex = index - 1;
             }
-            mCurrentIndex = index;
+            playSongAt(mCurrentIndex);
         }
-        playSongAt(mCurrentIndex);
     }
 
 
