@@ -90,6 +90,7 @@ public class SongAdapter extends PagingDataAdapter<Music, SongAdapter.SongViewHo
         notifyItemChanged(mMusicController.getCurrentIndex());
     }
 
+
     @NonNull
     @Override
     public SongViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

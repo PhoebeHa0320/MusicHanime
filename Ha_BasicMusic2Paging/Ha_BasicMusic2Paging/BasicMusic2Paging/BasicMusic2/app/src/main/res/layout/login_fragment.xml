@@ -9,38 +9,25 @@
         android:layout_width="280dp"
         android:layout_margin="10dp"
         android:layout_centerHorizontal="true"
-
         android:layout_height="200dp">
+
         <ImageView
             android:id="@+id/imgLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/zing128"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+         android:layout_margin="30dp"
+            android:src="@drawable/usericon" />
 
     </RelativeLayout>
-<!--    <ImageView-->
-<!--        android:id="@+id/imgLogo"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:src="@drawable/zing128"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_marginRight="40dp"-->
-<!--        android:layout_marginTop="40dp"/>-->
-    <ImageView
-        android:id="@+id/iconLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layout_left"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/usericon"
-        />
+
+
 
     <RelativeLayout
         android:id="@+id/form_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iconLogin"
+        android:layout_below="@id/layout_left"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
@@ -58,6 +45,7 @@
                 android:id="@+id/tvEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:hint="Email"
                 android:paddingLeft="10dp" />
 
@@ -77,6 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
+                android:background="@color/white"
                 android:paddingLeft="10dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -129,12 +118,12 @@
         android:id="@+id/btnResigter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/titleResigter"
         android:layout_below="@id/btn_login"
-        android:layout_marginTop="20dp"
         android:layout_marginStart="5dp"
-        android:textColor="@color/white"
-        android:text="Đăng kí" />
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@id/titleResigter"
+        android:text="Đăng kí"
+        android:textColor="@color/black" />
     <RelativeLayout
         android:layout_below="@id/titleResigter"
         android:layout_width="wrap_content"

@@ -11,7 +11,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
+import com.example.basicmusic.R;
 import com.example.basicmusic.databinding.FragmentRegisterBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,6 +28,7 @@ import java.util.HashMap;
 public class Register extends Fragment {
  FragmentRegisterBinding registerbinding;
  FirebaseAuth mFirebaseAuth;
+ NavController mNavController;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,12 +44,15 @@ public class Register extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        
+
         super.onViewCreated(view, savedInstanceState);
+        mNavController =
+                Navigation.findNavController(requireActivity(), R.id.idFragmentContainer);
         registerbinding.btnRegister.setOnClickListener(v ->{
 
             validateData();
         });
+
     }
     private String name ="",email = "" ,password= "";
 
@@ -115,8 +122,7 @@ public class Register extends Fragment {
                         //data added to database
 //                        progressDialog.dismiss();
                         Toast.makeText(requireActivity(), "Account created...", Toast.LENGTH_SHORT).show();
-//                        startActivity(new Intent(Register_Form.this, UserDashBoard.class));
-//                        finish();
+                        mNavController.navigate(R.id.action_registerMusic_to_loginMusic);
 
                     }
                 })

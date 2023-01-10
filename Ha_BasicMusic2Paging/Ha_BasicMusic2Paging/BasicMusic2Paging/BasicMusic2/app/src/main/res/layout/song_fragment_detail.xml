@@ -93,7 +93,7 @@
                     android:textColor="@color/black" />
 
                 <ImageButton
-                    android:id="@+id/btn_shuffle"
+                    android:id="@+id/btn_sync"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -103,10 +103,10 @@
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageButton
-                    android:id="@+id/btn_sync"
+                    android:id="@+id/btn_shuffle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@id/btn_shuffle"
+                    android:layout_toStartOf="@id/btn_sync"
                     android:background="@android:color/transparent"
                     android:padding="10dp"
                     android:src="@drawable/ic_baseline_shuffle_24"

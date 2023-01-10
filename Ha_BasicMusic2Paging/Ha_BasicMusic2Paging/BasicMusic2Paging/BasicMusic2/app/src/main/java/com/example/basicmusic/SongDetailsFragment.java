@@ -36,9 +36,9 @@ public class SongDetailsFragment extends Fragment {
     SongFragmentDetailBinding songdetailsbinding;
     NavController mNavController;
     private SongAdapter mAdapter;
-    MediaPlayer mediaPlayer;
-
     SeekBar seekBar;
+    boolean mRepeat = false;
+    boolean mRandom = false;
 
 
     private MainActivityViewModel mViewModel;
@@ -47,11 +47,12 @@ public class SongDetailsFragment extends Fragment {
         @Override
         public void run() {
             updateForSeconds();
-// lẤY CURRENTIME -- SEEKBAR + Update progress skSong
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("m:ss");
+// TODO lẤY CURRENTIME -- SEEKBAR + Update progress skSong
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
             songdetailsbinding.txtCurrentTime.setText(simpleDateFormat.format(mMusicController.getCurrentTimePos()));
+            songdetailsbinding.txtDuration.setText(simpleDateFormat.format(mMusicController.getDuration()));
             mHandler.postDelayed(mUpdateRunable, 1000);
-            // Kiểm tra thời gian bài hát => nếu kết thúc => nẽt;
+            // TODO Kiểm tra thời gian bài hát => nếu kết thúc => nẽt;
             mMusicController.setOnCompletionListener();
             setDateTotal();
         }
@@ -60,7 +61,7 @@ public class SongDetailsFragment extends Fragment {
     private Handler mHandler = new Handler();
 
     private void updateForSeconds() {
-        // PhucDV: TODO xử lý update các view sau mỗi giây tại đây VD: update text thời gian đang phát, thời gian còn lại
+//        TODO xử lý update các view sau mỗi giây tại đây VD: update text thời gian đang phát, thời gian còn lại
         seekBar.setProgress(mMusicController.getCurrentTimePos());
     }
 
@@ -145,10 +146,44 @@ public class SongDetailsFragment extends Fragment {
                 setTimeTotal();
                 songdetailsbinding.btnPlayPause.setImageResource(R.drawable.ic_baseline_pause_24);
 
-
             }
         });
+        songdetailsbinding.btnSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mRepeat == false) {
+                    if (mRandom == true) {
+                        mRandom = false;
+                        songdetailsbinding.btnSync.setImageResource(R.drawable.ic_baseline_sync_alt_24);
+                        songdetailsbinding.btnShuffle.setImageResource(R.drawable.ic_baseline_shuffle_24);
+                    }
+                    songdetailsbinding.btnShuffle.setImageResource(R.drawable.ic_baseline_shuffle_24);
+                    mRepeat = true;
+                }else {
+                    songdetailsbinding.btnSync.setImageResource(R.drawable.ic_baseline_repeated_245);
+                    mRepeat = false;
 
+                }
+            }
+        });
+        songdetailsbinding.btnShuffle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mRandom == false) {
+                    if (mRepeat == true) {
+                        mRepeat = false;
+                        songdetailsbinding.btnShuffle.setImageResource(R.drawable.ic_baseline_shuffle_24);
+                        songdetailsbinding.btnSync.setImageResource(R.drawable.ic_baseline_sync_alt_24);
+                    }
+                    songdetailsbinding.btnSync.setImageResource(R.drawable.ic_baseline_sync_alt_24);
+                    mRandom = true;
+                }else {
+                    songdetailsbinding.btnShuffle.setImageResource(R.drawable.ic_baseline_shuffled_245);
+                    mRepeat = false;
+
+                }
+            }
+        });
         songdetailsbinding.btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -162,17 +197,14 @@ public class SongDetailsFragment extends Fragment {
         mHandler.postDelayed(mUpdateRunable, 1000);
     }
 
-    private void setTimeTotal(){
+    private void setTimeTotal() {
         seekBar.setMax((int) mMusicController.getDuration());
         seekBar.setProgress(0);
     }
+
     private void setDateTotal() {
         String titleMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTitle();
-        String timeMusic = mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getTimes();
         songdetailsbinding.txtTitle.setText(titleMusic);
-        songdetailsbinding.txtDuration.setText(timeMusic);
-
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             Uri trackUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, Long.parseLong(mMusicController.getMusicSource().getAtIndex(mMusicController.getCurrentIndex()).getId()));
             try {

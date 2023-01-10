@@ -13,6 +13,7 @@
             android:layout_height="240dp"
             android:background="@drawable/shape_login_background"
             >
+
             <ImageButton
                 android:id="@+id/openNav"
                 android:layout_width="wrap_content"
@@ -23,14 +24,18 @@
                 android:layout_marginBottom="10dp"
                 android:background="@android:color/transparent"
                 android:src="@drawable/menubar" />
+
             <ImageView
                 android:id="@+id/imgUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/profile"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@android:color/transparent"
-                android:layout_margin="10dp" />
+                android:src="@drawable/profile" />
 
             <ImageView
                 android:id="@+id/imgLogo"
@@ -43,12 +48,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_below="@id/imgLogo"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="40dp"
+                android:layout_marginTop="10dp"
                 android:text="DashBoard"
-                android:textColor="@color/while_blue"
+                android:textColor="@color/white"
                 android:textSize="24sp" />
 
 
@@ -70,8 +75,8 @@
                 android:id="@+id/rcvCategory"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
 
                 />
@@ -88,7 +93,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:layout_toStartOf="@id/addFileMp3"
-            android:background="@drawable/shape_shadow"
+        android:backgroundTint="@color/violet"
             android:drawableStart="@drawable/categorymusic"
             android:text="Thêm Thể Loại" />
 
@@ -98,7 +103,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:src="@drawable/mp3" />
     </RelativeLayout>
 

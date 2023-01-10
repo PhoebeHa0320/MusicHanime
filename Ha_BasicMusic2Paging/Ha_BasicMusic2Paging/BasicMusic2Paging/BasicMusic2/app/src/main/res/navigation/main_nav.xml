@@ -47,7 +47,11 @@
     <fragment
         android:id="@+id/registerMusic"
         android:name="com.example.basicmusic.MainFragment.Register"
-        android:label="Register" />
+        android:label="Register" >
+        <action
+            android:id="@+id/action_registerMusic_to_loginMusic"
+            app:destination="@id/loginMusic" />
+    </fragment>
 <!--    <fragment-->
 <!--        android:id="@+id/fragmentContainer"-->
 <!--        android:name="com.example.basicmusic.MainFragment.FragmentContainer"-->

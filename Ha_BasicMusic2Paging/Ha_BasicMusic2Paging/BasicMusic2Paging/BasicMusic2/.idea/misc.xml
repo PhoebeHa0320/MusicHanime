@@ -38,6 +38,9 @@
         <entry key="..\:/Users/PC/Desktop/MusicHanime/Ha_BasicMusic2Paging/Ha_BasicMusic2Paging/BasicMusic2Paging/BasicMusic2/app/src/main/res/drawable/mail.xml" value="0.1955" />
         <entry key="..\:/Users/PC/Desktop/MusicHanime/Ha_BasicMusic2Paging/Ha_BasicMusic2Paging/BasicMusic2Paging/BasicMusic2/app/src/main/res/drawable/play_circle-48px.xml" value="0.2025" />
         <entry key="..\:/Users/PC/Desktop/MusicHanime/Ha_BasicMusic2Paging/Ha_BasicMusic2Paging/BasicMusic2Paging/BasicMusic2/app/src/main/res/drawable/shape_add_category.xml" value="0.236" />
+        <entry key="..\:/Users/PC/Desktop/MusicHanime/Ha_BasicMusic2Paging/Ha_BasicMusic2Paging/BasicMusic2Paging/BasicMusic2/app/src/main/res/drawable/shape_buton.xml" value="0.236" />
+        <entry key="..\:/Users/PC/Desktop/MusicHanime/Ha_BasicMusic2Paging/Ha_BasicMusic2Paging/BasicMusic2Paging/BasicMusic2/app/src/main/res/drawable/shape_category_center.xml" value="0.236" />
+        <entry key="..\:/Users/PC/Desktop/MusicHanime/Ha_BasicMusic2Paging/Ha_BasicMusic2Paging/BasicMusic2Paging/BasicMusic2/app/src/main/res/drawable/shape_login_background.xml" value="0.236" />
         <entry key="..\:/Users/PC/Desktop/MusicHanime/Ha_BasicMusic2Paging/Ha_BasicMusic2Paging/BasicMusic2Paging/BasicMusic2/app/src/main/res/drawable/shapeovan.xml" value="0.2025" />
         <entry key="..\:/Users/PC/Desktop/MusicHanime/Ha_BasicMusic2Paging/Ha_BasicMusic2Paging/BasicMusic2Paging/BasicMusic2/app/src/main/res/layout/activity_dash_board_admin.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/PC/Desktop/MusicHanime/Ha_BasicMusic2Paging/Ha_BasicMusic2Paging/BasicMusic2Paging/BasicMusic2/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
@@ -51,7 +54,8 @@
         <entry key="..\:/Users/PC/Desktop/MusicHanime/Ha_BasicMusic2Paging/Ha_BasicMusic2Paging/BasicMusic2Paging/BasicMusic2/app/src/main/res/layout/header_nav.xml" value="0.25" />
         <entry key="..\:/Users/PC/Desktop/MusicHanime/Ha_BasicMusic2Paging/Ha_BasicMusic2Paging/BasicMusic2Paging/BasicMusic2/app/src/main/res/layout/header_nav_admin.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/PC/Desktop/MusicHanime/Ha_BasicMusic2Paging/Ha_BasicMusic2Paging/BasicMusic2Paging/BasicMusic2/app/src/main/res/layout/home_admin.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/PC/Desktop/MusicHanime/Ha_BasicMusic2Paging/Ha_BasicMusic2Paging/BasicMusic2Paging/BasicMusic2/app/src/main/res/layout/home_fragment.xml" value="0.275" />
+        <entry key="..\:/Users/PC/Desktop/MusicHanime/Ha_BasicMusic2Paging/Ha_BasicMusic2Paging/BasicMusic2Paging/BasicMusic2/app/src/main/res/layout/home_fragment.xml" value="0.33" />
+        <entry key="..\:/Users/PC/Desktop/MusicHanime/Ha_BasicMusic2Paging/Ha_BasicMusic2Paging/BasicMusic2Paging/BasicMusic2/app/src/main/res/layout/item_tv.xml" value="0.365625" />
         <entry key="..\:/Users/PC/Desktop/MusicHanime/Ha_BasicMusic2Paging/Ha_BasicMusic2Paging/BasicMusic2Paging/BasicMusic2/app/src/main/res/layout/layout_notification_music.xml" value="0.33" />
         <entry key="..\:/Users/PC/Desktop/MusicHanime/Ha_BasicMusic2Paging/Ha_BasicMusic2Paging/BasicMusic2Paging/BasicMusic2/app/src/main/res/layout/library_fragment.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/PC/Desktop/MusicHanime/Ha_BasicMusic2Paging/Ha_BasicMusic2Paging/BasicMusic2Paging/BasicMusic2/app/src/main/res/layout/login_fragment.xml" value="0.36666666666666664" />

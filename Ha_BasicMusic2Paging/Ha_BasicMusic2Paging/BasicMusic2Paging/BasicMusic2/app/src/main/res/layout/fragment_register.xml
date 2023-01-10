@@ -58,6 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
+                android:background="@color/white"
                 android:paddingLeft="10dp" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
@@ -73,6 +74,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etTitleEmail"
                 android:layout_width="match_parent"
+                android:background="@color/white"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 />
@@ -90,6 +92,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etTitlePassword"
                 android:layout_width="match_parent"
+                android:background="@color/white"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 />
@@ -109,6 +112,7 @@
                 android:id="@+id/etTitleRepass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:paddingLeft="10dp"
                 />
         </com.google.android.material.textfield.TextInputLayout>
@@ -123,7 +127,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/shape_buton"
+    android:backgroundTint="@color/violet"
         android:text="Đăng Kí Tài Khoản"
-        android:textColor="@color/black" />
+        android:textColor="@color/white" />
 </RelativeLayout>

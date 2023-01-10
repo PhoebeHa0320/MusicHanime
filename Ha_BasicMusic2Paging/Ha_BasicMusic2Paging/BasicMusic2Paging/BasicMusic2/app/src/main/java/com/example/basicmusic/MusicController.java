@@ -16,6 +16,7 @@ import com.example.basicmusic.data.Music;
 import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import phucdv.android.musichelper.Song;
 
@@ -25,6 +26,9 @@ public class MusicController {
     private int mCurrentIndex;
     private boolean mIsPreparing;
     private MusicSource mMusicSource;
+    private boolean mRepeat = false;
+    private boolean mRandom = false;
+
 
     // : Đổi sang dạng singleton - start
     private static MusicController sInstance;
@@ -82,6 +86,28 @@ public class MusicController {
         return mIsPreparing;
     }
 
+//    public void playNext() {
+//        if (mMusicSource.getSize() != 0) {
+//            if (mCurrentIndex < mMusicSource.getSize() - 1) {
+//                mCurrentIndex++;
+//            } else {
+//                mCurrentIndex = 0;
+//            }
+//            playSongAt(mCurrentIndex);
+//        }
+//    }
+//
+//    public void playPrev() {
+//        if (mMusicSource.getSize() != 0) {
+//            if (mCurrentIndex > 0) {
+//                mCurrentIndex--;
+//            } else {
+//                mCurrentIndex = mMusicSource.getSize() - 1;
+//            }
+//            playSongAt(mCurrentIndex);
+//        }
+//    }
+
     public void playNext() {
         if (mMusicSource.getSize() != 0) {
             if (mCurrentIndex < mMusicSource.getSize() - 1) {
@@ -89,9 +115,28 @@ public class MusicController {
             } else {
                 mCurrentIndex = 0;
             }
-            playSongAt(mCurrentIndex);
         }
+        if (mRepeat == true) {
+            if (mCurrentIndex == 0) {
+                mCurrentIndex = mMusicSource.getSize();
+            }
+            mCurrentIndex -= 1;
+        }
+        if (mRandom == true) {
+            Random random = new Random();
+            int index = random.nextInt(mMusicSource.getSize());
+            if (index == mCurrentIndex) {
+                mCurrentIndex = index - 1;
+            }
+            mCurrentIndex = index;
+        }
+        if (mCurrentIndex > (mMusicSource.getSize() - 1)) {
+            mCurrentIndex = 0;
+        }
+        playSongAt(mCurrentIndex);
     }
+
+
 
     public void playPrev() {
         if (mMusicSource.getSize() != 0) {
@@ -100,9 +145,21 @@ public class MusicController {
             } else {
                 mCurrentIndex = mMusicSource.getSize() - 1;
             }
-            playSongAt(mCurrentIndex);
         }
+        if (mRepeat == true) {
+            mCurrentIndex += 1;
+        }
+        if (mRandom == true) {
+            Random random = new Random();
+            int index = random.nextInt(mMusicSource.getSize());
+            if (index == mCurrentIndex) {
+                mCurrentIndex = index - 1;
+            }
+            mCurrentIndex = index;
+        }
+        playSongAt(mCurrentIndex);
     }
+
 
     public void pause() {
         mMediaPlayer.pause();

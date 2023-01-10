@@ -3,6 +3,7 @@
     android:id="@+id/cateloryMusic"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="360dp"
@@ -26,72 +27,78 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/black"
             />
+
         <ImageView
             android:id="@+id/imgCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/listmp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_below="@id/tvTitleCategory"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
-            android:layout_centerHorizontal="true" />
+            android:src="@drawable/iconmussic2" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/shape_category_center"
+        android:layout_above="@id/btnUpCategory"
         android:layout_marginStart="20dp"
         android:layout_marginTop="180dp"
         android:layout_marginEnd="20dp"
-        android:layout_above="@id/btnUpCategory"
-        >
+        android:layout_marginBottom="19dp"
+        android:background="@drawable/shape_category_center">
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layout_Category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tên Thể Loại"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
-            >
+            android:hint="Tên Thể Loại">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etTitleMusic"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                />
+                android:background="@color/white"
+                android:paddingLeft="10dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
             android:id="@+id/imgSimger"
-            android:layout_width="240dp"
+            android:layout_width="200dp"
             android:layout_height="240dp"
-            android:layout_marginStart="40dp"
+            android:layout_below="@id/layout_Category"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/shape_login_background"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="20dp"
-            android:layout_below="@id/layout_Category"/>
+            android:background="@drawable/rem" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chọn ảnh"
             android:layout_below="@id/imgSimger"
+            android:layout_centerHorizontal="true"
             android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
-            android:layout_centerHorizontal="true"
-            />
+            android:backgroundTint="@color/violet"
+            android:text="Chọn ảnh" />
     </RelativeLayout>
+
     <Button
         android:id="@+id/btnUpCategory"
-        android:text="Cập Nhật Thể Loại"
         android:layout_width="match_parent"
-        android:textColor="@color/black"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/shape_buton"
-        />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/violet"
+        android:text="Cập Nhật Thể Loại"
+        android:textColor="@color/white" />
 
 
 </RelativeLayout>

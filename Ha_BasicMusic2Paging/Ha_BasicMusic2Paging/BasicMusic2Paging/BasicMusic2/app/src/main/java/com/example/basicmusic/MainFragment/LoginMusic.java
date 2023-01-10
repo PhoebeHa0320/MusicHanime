@@ -114,12 +114,10 @@ public class LoginMusic extends Fragment {
                         if(userType.equals("user")){
                             //this is simple user ,open user dashboard
                             startActivity(new Intent(requireActivity(),MainActivity.class));
-//                            finish();
-
                         }else if(userType.equals("admin")){
                             //this is simple user ,open admin dashboard
                             startActivity(new Intent(requireActivity(), DashBoardAdmin.class));
-//                            finish();
+
 
                         }
                     }
