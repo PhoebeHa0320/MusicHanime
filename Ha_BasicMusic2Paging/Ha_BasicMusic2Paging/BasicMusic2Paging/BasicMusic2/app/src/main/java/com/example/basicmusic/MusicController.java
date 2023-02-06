@@ -26,10 +26,8 @@ public class MusicController {
     private int mCurrentIndex;
     private boolean mIsPreparing;
     private MusicSource mMusicSource;
-    private boolean mRepeat = false;
-    private boolean mRandom = false;
-
-
+    static boolean mRepeat = false;
+    static boolean mRandom = false;
     // : Đổi sang dạng singleton - start
     private static MusicController sInstance;
 
@@ -86,28 +84,6 @@ public class MusicController {
         return mIsPreparing;
     }
 
-//    public void playNext() {
-//        if (mMusicSource.getSize() != 0) {
-//            if (mCurrentIndex < mMusicSource.getSize() - 1) {
-//                mCurrentIndex++;
-//            } else {
-//                mCurrentIndex = 0;
-//            }
-//            playSongAt(mCurrentIndex);
-//        }
-//    }
-//
-//    public void playPrev() {
-//        if (mMusicSource.getSize() != 0) {
-//            if (mCurrentIndex > 0) {
-//                mCurrentIndex--;
-//            } else {
-//                mCurrentIndex = mMusicSource.getSize() - 1;
-//            }
-//            playSongAt(mCurrentIndex);
-//        }
-//    }
-
     public void playNext() {
         if (mMusicSource.getSize() != 0) {
             if (mCurrentIndex < mMusicSource.getSize() - 1) {
@@ -115,28 +91,9 @@ public class MusicController {
             } else {
                 mCurrentIndex = 0;
             }
-        }
-        if (mRepeat == true) {
-            if (mCurrentIndex == 0) {
-                mCurrentIndex = mMusicSource.getSize();
-            }
-            mCurrentIndex -= 1;
-        }
-        if (mRandom == true) {
-            Random random = new Random();
-            int index = random.nextInt(mMusicSource.getSize());
-            if (index == mCurrentIndex) {
-                mCurrentIndex = index - 1;
-            }
             playSongAt(mCurrentIndex);
         }
-        if (mCurrentIndex > (mMusicSource.getSize() - 1)) {
-            mCurrentIndex = 0;
-        }
-        playSongAt(mCurrentIndex);
     }
-
-
 
     public void playPrev() {
         if (mMusicSource.getSize() != 0) {
@@ -145,19 +102,73 @@ public class MusicController {
             } else {
                 mCurrentIndex = mMusicSource.getSize() - 1;
             }
-        }
-        if (mRepeat == true) {
-            mCurrentIndex += 1;
-        }
-        if (mRandom == true) {
-            Random random = new Random();
-            int index = random.nextInt(mMusicSource.getSize());
-            if (index == mCurrentIndex) {
-                mCurrentIndex = index - 1;
-            }
             playSongAt(mCurrentIndex);
         }
     }
+    public void clickRandom() {
+        if (mMusicSource.getSize() != 0) {
+            if (mCurrentIndex < mMusicSource.getSize() - 1) {
+                mCurrentIndex++;
+            } else {
+                mCurrentIndex = 0;
+            }
+            if (!mRandom && !mRepeat) {
+                mCurrentIndex = getRandom(mMusicSource.getSize() - 1);
+            } else if (mRandom && !mRepeat) {
+                mCurrentIndex = ((mCurrentIndex) % mMusicSource.getSize());
+            }
+            playSongAt(mCurrentIndex);
+        }}
+//    public void playNext() {
+//        if (mMusicSource.getSize() != 0) {
+//            if (mCurrentIndex < mMusicSource.getSize() - 1) {
+//                mCurrentIndex++;
+//            } else {
+//                mCurrentIndex = 0;
+//            }
+//        }
+//        if (mRepeat == true) {
+//            if (mCurrentIndex == 0) {
+//                mCurrentIndex = mMusicSource.getSize();
+//            }
+//            mCurrentIndex -= 1;
+//        }
+//        if (mRandom == true) {
+//            Random random = new Random();
+//            int index = random.nextInt(mMusicSource.getSize());
+//            if (index == mCurrentIndex) {
+//                mCurrentIndex = index - 1;
+//            }
+//            playSongAt(mCurrentIndex);
+//        }
+//        if (mCurrentIndex > (mMusicSource.getSize() - 1)) {
+//            mCurrentIndex = 0;
+//        }
+//        playSongAt(mCurrentIndex);
+//    }
+//
+//
+//
+//    public void playPrev() {
+//        if (mMusicSource.getSize() != 0) {
+//            if (mCurrentIndex > 0) {
+//                mCurrentIndex--;
+//            } else {
+//                mCurrentIndex = mMusicSource.getSize() - 1;
+//            }
+//        }
+//        if (mRepeat == true) {
+//            mCurrentIndex += 1;
+//        }
+//        if (mRandom == true) {
+//            Random random = new Random();
+//            int index = random.nextInt(mMusicSource.getSize());
+//            if (index == mCurrentIndex) {
+//                mCurrentIndex = index - 1;
+//            }
+//            playSongAt(mCurrentIndex);
+//        }
+//    }
 
 
     public void pause() {
@@ -204,7 +215,10 @@ public class MusicController {
     public void seekTo(int pos){
         mMediaPlayer.seekTo(pos);
     }
-
+    private int getRandom(int i) {
+        Random random = new Random();
+        return random.nextInt(i + 1);
+    }
     public void deleteMusic(int pos){
 
     }

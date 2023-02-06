@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton btnMore;
     NavController mNavController;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

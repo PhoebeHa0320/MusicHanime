@@ -28,6 +28,7 @@ import com.example.basicmusic.data.Music;
 import com.example.basicmusic.databinding.SongFragmentDetailBinding;
 
 import java.text.SimpleDateFormat;
+import java.util.Random;
 
 public class SongDetailsFragment extends Fragment {
 
@@ -37,8 +38,8 @@ public class SongDetailsFragment extends Fragment {
     NavController mNavController;
     private SongAdapter mAdapter;
     SeekBar seekBar;
-    boolean mRepeat = false;
-    boolean mRandom = false;
+    static boolean mRepeat = false;
+    static boolean mRandom = false;
 
 
     private MainActivityViewModel mViewModel;
@@ -145,23 +146,19 @@ public class SongDetailsFragment extends Fragment {
                 setDateTotal();
                 setTimeTotal();
                 songdetailsbinding.btnPlayPause.setImageResource(R.drawable.ic_baseline_pause_24);
-
             }
         });
         songdetailsbinding.btnSync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mRepeat == false) {
-                    if (mRandom == true) {
-                        mRandom = false;
-                        songdetailsbinding.btnSync.setImageResource(R.drawable.ic_baseline_sync_alt_24);
-                        songdetailsbinding.btnShuffle.setImageResource(R.drawable.ic_baseline_shuffle_24);
-                    }
-                    songdetailsbinding.btnShuffle.setImageResource(R.drawable.ic_baseline_shuffle_24);
-                    mRepeat = true;
-                }else {
-                    songdetailsbinding.btnSync.setImageResource(R.drawable.ic_baseline_repeated_245);
+                if (mRepeat) {
                     mRepeat = false;
+                    songdetailsbinding.btnSync.setImageResource(R.drawable.ic_baseline_sync_alt_24);
+                } else {
+                    mRepeat = true;
+
+                    songdetailsbinding.btnSync.setImageResource(R.drawable.ic_baseline_repeated_245);
+
 
                 }
             }
@@ -169,17 +166,14 @@ public class SongDetailsFragment extends Fragment {
         songdetailsbinding.btnShuffle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mRandom == false) {
-                    if (mRepeat == true) {
-                        mRepeat = false;
-                        songdetailsbinding.btnShuffle.setImageResource(R.drawable.ic_baseline_shuffle_24);
-                        songdetailsbinding.btnSync.setImageResource(R.drawable.ic_baseline_sync_alt_24);
-                    }
-                    songdetailsbinding.btnSync.setImageResource(R.drawable.ic_baseline_sync_alt_24);
+                mAdapter.clickRandom();
+                if (mRandom) {
+                    mRandom = false;
+                    songdetailsbinding.btnShuffle.setImageResource(R.drawable.ic_baseline_shuffle_24);
+                } else {
                     mRandom = true;
-                }else {
                     songdetailsbinding.btnShuffle.setImageResource(R.drawable.ic_baseline_shuffled_245);
-                    mRepeat = false;
+
 
                 }
             }
@@ -193,9 +187,10 @@ public class SongDetailsFragment extends Fragment {
                 songdetailsbinding.btnPlayPause.setImageResource(R.drawable.ic_baseline_pause_24);
             }
         });
-
         mHandler.postDelayed(mUpdateRunable, 1000);
     }
+
+
 
     private void setTimeTotal() {
         seekBar.setMax((int) mMusicController.getDuration());

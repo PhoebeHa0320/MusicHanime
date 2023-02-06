@@ -89,6 +89,12 @@ public class SongAdapter extends PagingDataAdapter<Music, SongAdapter.SongViewHo
         notifyItemChanged(lastIndex);
         notifyItemChanged(mMusicController.getCurrentIndex());
     }
+    public void clickRandom(){
+        int lastIndex = mMusicController.getCurrentIndex();
+        mMusicController.clickRandom();
+        notifyItemChanged(lastIndex);
+        notifyItemChanged(mMusicController.getCurrentIndex());
+    }
 
 
     @NonNull
