@@ -17,6 +17,7 @@ import androidx.navigation.Navigation;
 import com.example.basicmusic.R;
 import com.example.basicmusic.SongDetailsFragment;
 import com.example.basicmusic.databinding.HomeAdminBinding;
+import com.example.basicmusic.databinding.SingerItemBinding;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,7 +41,7 @@ public class homeAdmin extends Fragment {
         mNavController =
                 Navigation.findNavController(requireActivity(), R.id.idFragmentContainerAdmin);
         //handler click add Category
-        homeadminbinding.buttonAddCategory.setOnClickListener(v->{
+        homeadminbinding.btnManagerCategory.setOnClickListener(v->{
             mNavController.navigate(R.id.action_homeAdmin_to_addCategoryMusic);
             //  start
             AddCategoryMusic addCategoryMusic = new AddCategoryMusic();
@@ -63,12 +64,33 @@ public class homeAdmin extends Fragment {
             homeadminbinding.drawerLayout.openDrawer(GravityCompat.START);
         });
         //handler click add file mp3
-        homeadminbinding.addFileMp3.setOnClickListener(v->{
+        homeadminbinding.btnManagerMusic.setOnClickListener(v->{
             mNavController.navigate(R.id.action_homeAdmin_to_addFileMp32);
             //  start
             addFileMp3 addfileMp3 = new addFileMp3();
             //  end
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.containerfileMp3,addfileMp3);
+        });
+        homeadminbinding.btnManagerSinger.setOnClickListener(v->{
+            mNavController.navigate(R.id.action_homeAdmin_to_singerFragment);
+            //  start
+            SingerFragment singer = new SingerFragment();
+            //  end
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.singerMusic,singer);
+        });
+        homeadminbinding.btnManagerUser.setOnClickListener(v->{
+            mNavController.navigate(R.id.action_homeAdmin_to_addFileMp32);
+            //  start
+            UserFragment user = new UserFragment();
+            //  end
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.userContainer,user);
+        });
+        homeadminbinding.btnManagerVideo.setOnClickListener(v->{
+            mNavController.navigate(R.id.action_homeAdmin_to_addFileMp32);
+            //  start
+            VideoFragment video = new VideoFragment();
+            //  end
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.videoContainer,video);
         });
         homeadminbinding.navgationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override

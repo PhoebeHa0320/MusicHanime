@@ -24,71 +24,139 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.basicmusic.databinding.AddCategoryMusicBinding;
+import com.example.basicmusic.Admin.Adapter.SingerAdapter;
+import com.example.basicmusic.Admin.Adapter.SingerRcvAdapter;
+import com.example.basicmusic.Admin.ModelAdmin.Singer;
+import com.example.basicmusic.databinding.SingerFragmentBinding;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AddCategoryMusic extends Fragment {
-    AddCategoryMusicBinding addCategoryMusicBinding;
-    private Uri imageUri = null;
-    //progress dialig
+public class SingerFragment extends Fragment {
+    SingerFragmentBinding singerbinding;
 
-    //init firebase auth
-    FirebaseAuth mFirebaseAuth;
+    //adapter
+    private SingerAdapter adapter;
+////    private SingerRcvAdapter adapter;
+//    RecyclerView recycleview;
+    //array list to hold list of data of type Singer
+    private ArrayList<Singer> singerList;
+
+    private FirebaseAuth mfiFirebaseAuth;
+    private Uri imageUri = null;
     private ProgressDialog progressDialog;
     private static final String TAG ="SINGER_IV";
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mFirebaseAuth = FirebaseAuth.getInstance();
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        addCategoryMusicBinding = AddCategoryMusicBinding.inflate(inflater, container,false);
+        singerbinding= SingerFragmentBinding.inflate(inflater,container,false);
+        return singerbinding.getRoot();
+    }
 
-        //hanlder click back Category
-        addCategoryMusicBinding.btnBack.setOnClickListener(v->{
-            requireActivity().onBackPressed();
-        });
-        return addCategoryMusicBinding.getRoot();
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mfiFirebaseAuth = FirebaseAuth.getInstance();
 
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        addCategoryMusicBinding.imgCategory.setOnClickListener(v->{
+        singerbinding.imgSinger.setOnClickListener(v->{
             showImageAttachMenu();
         });
         //setup progress dialog
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setTitle("Please wait..");
         progressDialog.setCanceledOnTouchOutside(false);
-        addCategoryMusicBinding.btnAddCategory.setOnClickListener(v->{
-            validateData();
+
+        singerbinding.btnAddSinger.setOnClickListener(v->{
+            validatedata();
         });
+//        recycleview = singerbinding.rcvSinger;
+//        recycleview.setLayoutManager(new LinearLayoutManager(requireActivity()));
+
+
+//        FirebaseRecyclerOptions<Singer> options =
+//                new FirebaseRecyclerOptions.Builder<Singer>()
+//                        .setQuery(FirebaseDatabase.getInstance().getReference("SingerMusic"),Singer.class)
+//                        .build();
+        //adapter
+        loadSingerInfoFromDb();
+//        adapter = new SingerAdapter(options);
+//        recycleview.setAdapter(adapter);
+////        loadSingerInfoFromDb();
+
     }
-    private String title = "";
-    private void validateData() {
+
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        adapter.startListening();
+//    }
+
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//    }
+        private void loadSingerInfoFromDb() {
+            //init arraylisst
+            singerList = new ArrayList<>();
+
+            //getAll categories form firebase  >Categories
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("SingerMusic");
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    //clear arraylist before adđing data info it
+                    singerList.clear();
+                    for(DataSnapshot ds:snapshot.getChildren()){
+                        //get Data
+                        Singer model = ds.getValue(Singer.class);
+                        //add arraylist
+                        singerList.add(model);
+
+                    }
+                    //setAdapter Recycle view
+                    adapter = new SingerAdapter(getActivity(),singerList);
+                    singerbinding.rcvSinger.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+    }
+
+    private String titleSinger = "";
+
+    private void validatedata() {
         //Step:validate Data
         Log.d(TAG, "validateData: validating data...");
         //Step getData
-        title = addCategoryMusicBinding.etTitleMusic.getText().toString().trim();
+        titleSinger = singerbinding.etTitleCategory.getText().toString().trim();
 
         //validate Data
-        if(TextUtils.isEmpty(title)){
+        if(TextUtils.isEmpty(titleSinger)){
             Toast.makeText(requireActivity(), "Enter Title..", Toast.LENGTH_SHORT).show();
         }
         else if(imageUri==null){
@@ -101,7 +169,7 @@ public class AddCategoryMusic extends Fragment {
 
     private void uploadImageStorage() {
         //Step2:Validate data
-        Log.d(TAG, "uploadImageStorage: ");
+        Log.d(TAG, "uploadPdfStorage: ");
 
 
         //show progressdialog
@@ -110,7 +178,7 @@ public class AddCategoryMusic extends Fragment {
         //timestamp
         long timetamp = System.currentTimeMillis();
         //path off pdfin firebase storage
-        String filepathName = "CategoryMusic/" +timetamp;
+        String filepathName = "SingerMusic/" +timetamp;
         //Storage refendence
         StorageReference storageReference = FirebaseStorage.getInstance().getReference(filepathName);
         storageReference.putFile(imageUri)
@@ -131,30 +199,29 @@ public class AddCategoryMusic extends Fragment {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         progressDialog.dismiss();
-                        Log.d(TAG, "onFailure: Image upload failed..."+e.getMessage());
-                        Toast.makeText(requireActivity(), "Image upload failed due to", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "onFailure: PDF upload failed..."+e.getMessage());
+                        Toast.makeText(requireActivity(), "PDF upload failed due to", Toast.LENGTH_SHORT).show();
 
                     }
                 });
     }
 
     private void uploadToInfoDb(String uploadImagegUrl, long timetamp) {
-
         //Step3:Upload pdf info to firebase db
 
         Log.d(TAG, "uploadPdfStorage:Uploading Image info to firebase db... ");
         progressDialog.setMessage("Uploading Image info...");
-        String uid = mFirebaseAuth.getUid();
+        String uid = mfiFirebaseAuth.getUid();
         //Setup data to upload also add view count ,download count wwhile adding pdf/book
 
         HashMap<String,Object> hashMap = new HashMap<>();
         hashMap.put("uid",""+uid);
         hashMap.put("id",""+timetamp);
-        hashMap.put("title",""+title);
+        hashMap.put("title",""+titleSinger);
         hashMap.put("url",""+uploadImagegUrl);
 
         //db reference DB>Books
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("CategoryMusic");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("SingerMusic");
         ref.child("" +timetamp)
                 .setValue(hashMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -175,9 +242,8 @@ public class AddCategoryMusic extends Fragment {
                 });
     }
 
-
     private void showImageAttachMenu() {
-        PopupMenu popup = new PopupMenu(requireActivity(),addCategoryMusicBinding.imgCategory);
+        PopupMenu popup = new PopupMenu(requireActivity(),singerbinding.imgSinger);
         popup.getMenu().add(Menu.NONE,0,0,"Camera");
         popup.getMenu().add(Menu.NONE,1,1,"Gallery");
         popup.show();
@@ -227,7 +293,7 @@ public class AddCategoryMusic extends Fragment {
                     //get uri of image
                     if(result.getResultCode() == Activity.RESULT_OK){
                         Intent data  = result.getData(); //no need here as in camera case we alrealdy  have image in imageuri varible
-                        addCategoryMusicBinding.imgCategory.setImageURI(imageUri);
+                        singerbinding.imgSinger.setImageURI(imageUri);
 
                     }else{
                         Toast.makeText(requireActivity(), "Thử lại", Toast.LENGTH_SHORT).show();
@@ -247,7 +313,7 @@ public class AddCategoryMusic extends Fragment {
                         Intent data  = result.getData(); //no need here as in camera case we alrealdy  have image in imageuri varible
                         imageUri = data.getData();
                         Log.d(TAG, "onActivityResult: "+imageUri    );
-                        addCategoryMusicBinding.imgCategory.setImageURI(imageUri);
+                        singerbinding.imgSinger.setImageURI(imageUri);
 
                     }else{
                         Toast.makeText(requireActivity(), "Thử lại", Toast.LENGTH_SHORT).show();
@@ -255,5 +321,4 @@ public class AddCategoryMusic extends Fragment {
                 }
             }
     );
-
 }

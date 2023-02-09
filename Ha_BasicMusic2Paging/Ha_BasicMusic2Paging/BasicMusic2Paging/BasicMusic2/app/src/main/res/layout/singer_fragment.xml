@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cateloryMusic"
+    android:id="@+id/singerMusic"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/layout_header"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="360dp"
         android:background="@drawable/shape_add_category"
         >
         <ImageButton
@@ -24,7 +24,7 @@
             android:id="@+id/tvTitleCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thêm Thể Loại Nhạc"
+            android:text="Thêm Nghệ Sỹ"
             android:textSize="18sp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
@@ -32,13 +32,14 @@
             />
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imgCategory"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:id="@+id/imgSinger"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
             android:layout_below="@id/tvTitleCategory"
             android:layout_centerHorizontal="true"
             app:shapeAppearance="@style/styleCycleImage"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:src="@drawable/iconmussic2" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -48,12 +49,13 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
-            android:layout_below="@id/imgCategory"
-            android:hint="Tên Thể Loại">
+            android:layout_below="@id/imgSinger"
+            android:hint="Tên Nghệ Sỹ">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etTitleMusic"
+                android:id="@+id/etTitleCategory"
                 android:layout_width="match_parent"
+                android:textColor="@color/black"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:paddingLeft="10dp" />
@@ -67,18 +69,18 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
             <Button
-                android:id="@+id/btnAddCategory"
+                android:id="@+id/btnAddSinger"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Thêm"/>
             <Button
-                android:id="@+id/btnDeleteCategory"
+                android:id="@+id/btnDeleteSinger"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:text="Xoá"/>
             <Button
-                android:id="@+id/btnEditCategory"
+                android:id="@+id/btnEditSinger"
                 android:layout_width="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_height="wrap_content"
@@ -88,7 +90,7 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvCategory"
+        android:id="@+id/rcvSinger"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/layout_header"
@@ -97,7 +99,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        tools:listitem="@layout/category_item" />
+        android:paddingTop="5dp"
+        />
 
 
 </RelativeLayout>

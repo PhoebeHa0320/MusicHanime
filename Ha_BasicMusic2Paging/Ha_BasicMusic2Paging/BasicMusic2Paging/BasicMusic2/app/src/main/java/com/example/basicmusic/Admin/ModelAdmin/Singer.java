@@ -1,15 +1,14 @@
 package com.example.basicmusic.Admin.ModelAdmin;
 
-public class CategoryMusic {
-    private String id, nameCategory,url_image,uid;
+
+
+public class Singer {
+    private String id, nameSinger,url_image,uid;
     long timestamp;
 
-    public CategoryMusic() {
-    }
-
-    public CategoryMusic(String id, String nameCategory, String url_image, String uid, long timestamp) {
+    public Singer(String id, String nameSinger, String url_image, String uid,  long timestamp) {
         this.id = id;
-        this.nameCategory = nameCategory;
+        this.nameSinger = nameSinger;
         this.url_image = url_image;
         this.uid = uid;
         this.timestamp = timestamp;
@@ -31,12 +30,12 @@ public class CategoryMusic {
         this.id = id;
     }
 
-    public String getNameCategory() {
-        return nameCategory;
+    public String getNameSinger() {
+        return nameSinger;
     }
 
-    public void setNameCategory(String nameCategory) {
-        this.nameCategory = nameCategory;
+    public void setNameSinger(String nameSinger) {
+        this.nameSinger = nameSinger;
     }
 
     public String getUrl_image() {

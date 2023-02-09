@@ -58,56 +58,71 @@
 
 
         </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/layout_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/shape_category_center"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_above="@id/buttonAddCategory"
-            android:layout_marginTop="200dp">
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rcvCategory"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
-
-                />
-
-        </RelativeLayout>
-
         <Button
-            android:id="@+id/buttonAddCategory"
+            android:id="@+id/btnManagerUser"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
             android:layout_marginStart="8dp"
+            android:layout_below="@id/layout_header"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_toStartOf="@id/addFileMp3"
-        android:backgroundTint="@color/violet"
+            android:backgroundTint="@color/violet"
             android:drawableStart="@drawable/categorymusic"
-            android:text="Thêm Thể Loại" />
+            android:text="Quản Lý Người Dùng" />
+        <Button
+            android:id="@+id/btnManagerSinger"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_below="@id/btnManagerUser"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/violet"
+            android:drawableStart="@drawable/categorymusic"
+            android:text="Quản Lý Nghệ Sỹ" />
+        <Button
+            android:id="@+id/btnManagerMusic"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_below="@id/btnManagerSinger"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/violet"
+            android:drawableStart="@drawable/categorymusic"
+            android:text="Quản Lý Nhạc" />
 
-        <ImageButton
-            android:id="@+id/addFileMp3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/mp3" />
+        <Button
+            android:id="@+id/btnManagerCategory"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_below="@id/btnManagerMusic"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/violet"
+            android:drawableStart="@drawable/categorymusic"
+            android:text="Quản Lý Thể Loại" />
+
+        <Button
+            android:id="@+id/btnManagerVideo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:layout_below="@id/btnManagerCategory"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/violet"
+            android:drawableStart="@drawable/categorymusic"
+            android:text="Quản Lý Video" />
+
+
+
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView

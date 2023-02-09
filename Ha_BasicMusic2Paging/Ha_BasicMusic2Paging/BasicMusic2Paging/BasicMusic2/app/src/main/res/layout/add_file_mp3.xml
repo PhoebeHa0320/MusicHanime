@@ -5,8 +5,9 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@id/layout_header"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/shape_add_category">
 
         <ImageButton
@@ -28,29 +29,32 @@
             android:textSize="18sp" />
 
         <ImageView
-            android:id="@+id/imgCategory"
+            android:id="@+id/imgFileMp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvTitleCategory"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="7dp"
             android:src="@drawable/mpzing" />
 
-    </RelativeLayout>
+        <ImageView
+            android:id="@+id/imgSimger"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
+           android:layout_toEndOf="@id/imgFileMp"
+            android:layout_below="@id/tvTitleCategory"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rem" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/btnUpFileMp3"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="180dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/shape_category_center">
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layout_Title"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/imgSimger"
             android:layout_margin="10dp"
             android:hint="Tên bài hát">
 
@@ -93,38 +97,39 @@
                 android:background="@color/white"
                 android:paddingLeft="10dp" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <ImageView
-            android:id="@+id/imgSimger"
-            android:layout_width="120dp"
-            android:layout_height="140dp"
+        <LinearLayout
+            android:id="@+id/layout_btn"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
             android:layout_below="@id/layout_Singer"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/rem" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/layout_Singer"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="60dp"
-            android:layout_toEndOf="@id/imgSimger"
-            android:backgroundTint="@color/violet"
-            android:text="Chọn ảnh" />
-
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/AdđMusic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thêm" />
+            <Button
+                android:id="@+id/editMusic"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:text="Sửa" />
+            <Button
+                android:id="@+id/DelateMusic"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:text="Xoá" />
+        </LinearLayout>
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/btnUpFileMp3"
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
- android:backgroundTint="@color/violet"
-        android:text="Cập Nhật Bài Hát"
-        android:textColor="@color/white" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout_header"
+        android:layout_margin="10dp"
+         />
+
+
 </RelativeLayout>

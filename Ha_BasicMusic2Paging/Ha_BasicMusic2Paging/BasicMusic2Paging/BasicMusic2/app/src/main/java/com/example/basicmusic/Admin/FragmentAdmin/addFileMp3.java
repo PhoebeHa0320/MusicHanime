@@ -1,22 +1,42 @@
 package com.example.basicmusic.Admin.FragmentAdmin;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.basicmusic.databinding.AddFileMp3Binding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class addFileMp3 extends Fragment {
     AddFileMp3Binding addFileMp3Binding;
-
+    FirebaseAuth mFirebaseAuth;
+    private Uri imageUri = null;
+    private ProgressDialog progressDialog;
+    private static final String TAG ="SINGER_IV";
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFirebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Nullable
@@ -34,5 +54,104 @@ public class addFileMp3 extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        //handle Click selected Pickture from gellary
+        addFileMp3Binding.imgSimger.setOnClickListener(v->{
+            showImageAttachMenu();
+        });
+        //handle Click selected file mp3 from gallery
+        addFileMp3Binding.imgFileMp.setOnClickListener(v -> {
+            selectFileMp3();
+        });
+        //setup progress dialog
+        progressDialog = new ProgressDialog(requireActivity());
+        progressDialog.setTitle("Please wait..");
+        progressDialog.setCanceledOnTouchOutside(false);
+
+
     }
+
+    private void selectFileMp3() {
+        
+    }
+
+    private void showImageAttachMenu() {
+        PopupMenu popup = new PopupMenu(requireActivity(),addFileMp3Binding.imgSimger);
+        popup.getMenu().add(Menu.NONE,0,0,"Camera");
+        popup.getMenu().add(Menu.NONE,1,1,"Gallery");
+        popup.show();
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int which  = item.getItemId();
+                if(which ==0){
+                    //Camera
+                    pickImageCamera();
+                }else if(which ==1){
+                    //Gallery
+                     pickImageGallery();
+                }
+                return false;
+            }
+        });
+
+    }
+    private void pickImageGallery() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        galleryResultLauncher.launch(intent);
+    }
+
+    private void pickImageCamera() {
+        //intent to pick image from camera
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MediaStore.Images.Media.TITLE,"Chọn Mới");
+        contentValues.put(MediaStore.Images.Media.DESCRIPTION,"");
+        imageUri = requireActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValues);
+
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+        cameraResultLauncher.launch(intent);
+
+
+    }
+    private ActivityResultLauncher<Intent> cameraResultLauncher= registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    Log.d(TAG, "onActivityResult: "+imageUri);
+                    //used to handle result of camera
+                    //get uri of image
+                    if(result.getResultCode() == Activity.RESULT_OK){
+                        Intent data  = result.getData(); //no need here as in camera case we alrealdy  have image in imageuri varible
+                        addFileMp3Binding.imgSimger.setImageURI(imageUri);
+
+                    }else{
+                        Toast.makeText(requireActivity(), "Thử lại", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            }
+    );
+    private ActivityResultLauncher<Intent> galleryResultLauncher= registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    //get uri of image
+                    if(result.getResultCode() == Activity.RESULT_OK){
+                        Log.d(TAG, "onActivityResult: "+imageUri);
+                        Intent data  = result.getData(); //no need here as in camera case we alrealdy  have image in imageuri varible
+                        imageUri = data.getData();
+                        Log.d(TAG, "onActivityResult: "+imageUri    );
+                        addFileMp3Binding.imgSimger.setImageURI(imageUri);
+
+                    }else{
+                        Toast.makeText(requireActivity(), "Thử lại", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+    );
 }

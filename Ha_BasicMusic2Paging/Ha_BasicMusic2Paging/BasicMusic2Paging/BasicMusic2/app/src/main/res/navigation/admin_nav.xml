@@ -14,6 +14,15 @@
         <action
             android:id="@+id/action_homeAdmin_to_addFileMp32"
             app:destination="@id/addFileMp32" />
+        <action
+            android:id="@+id/action_homeAdmin_to_singerFragment"
+            app:destination="@id/singerFragment" />
+        <action
+            android:id="@+id/action_homeAdmin_to_userFragment"
+            app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_homeAdmin_to_videoFragment"
+            app:destination="@id/videoFragment" />
     </fragment>
     <fragment
         android:id="@+id/addCategoryMusic"
@@ -27,4 +36,16 @@
         android:id="@+id/mainActivity"
         android:name="com.example.basicmusic.MainActivity"
         android:label="MainActivity" />
+    <fragment
+        android:id="@+id/singerFragment"
+        android:name="com.example.basicmusic.Admin.FragmentAdmin.SingerFragment"
+        android:label="SingerFragment" />
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.basicmusic.Admin.FragmentAdmin.UserFragment"
+        android:label="UserFragment" />
+    <fragment
+        android:id="@+id/videoFragment"
+        android:name="com.example.basicmusic.Admin.FragmentAdmin.VideoFragment"
+        android:label="VideoFragment" />
 </navigation>
