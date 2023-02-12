@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         mNavController = navHostFragment.getNavController();
         drawerLayout = binding.iddrawerlayout;
-        btnMore = binding.btnMore;
+//        btnMore = binding.btnMore;
 
         binding.btnDrawer.setOnClickListener(v -> {
             drawerLayout.openDrawer(GravityCompat.START);
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 }
-                binding.txtHeader.setText(item.getTitle());
+//                binding.txtHeader.setText(item.getTitle());
                 drawerLayout.closeDrawer(mNavView);
                 return true;
             }
