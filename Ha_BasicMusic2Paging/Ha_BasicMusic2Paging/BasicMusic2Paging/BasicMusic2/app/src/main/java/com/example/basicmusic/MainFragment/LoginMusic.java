@@ -22,6 +22,7 @@ import com.example.basicmusic.databinding.HomeAdminBinding;
 import com.example.basicmusic.databinding.LoginFragmentBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,6 +36,7 @@ public class LoginMusic extends Fragment {
     FirebaseAuth mFirebaseAuth;
     LoginFragmentBinding loginbinding;
     NavController mNavController;
+    NavigationView mNavView;
     @Override
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,7 +49,6 @@ public class LoginMusic extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     };
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -113,7 +114,9 @@ public class LoginMusic extends Fragment {
                         //check user type
                         if(userType.equals("user")){
                             //this is simple user ,open user dashboard
-                            startActivity(new Intent(requireActivity(),MainActivity.class));
+                            Intent intent = new Intent(requireActivity(),MainActivity.class);
+                            startActivity(intent);
+
                         }else if(userType.equals("admin")){
                             //this is simple user ,open admin dashboard
                             startActivity(new Intent(requireActivity(), DashBoardAdmin.class));

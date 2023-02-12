@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/videoContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <VideoView
+        android:id="@+id/videoPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_margin="10dp"
+   />
+
+    <TextView
+        android:id="@+id/evSinger"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/videoPlayer"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:drawableStart="@drawable/ic_baseline_category_24"
+        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+        android:padding="12dp" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/layout_ev"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/evSinger"
+        app:endIconMode="clear_text"
+        app:startIconDrawable="@drawable/adduser"
+        android:layout_margin="10dp">
+        <EditText
+            android:id="@+id/etTitleEv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 </RelativeLayout>

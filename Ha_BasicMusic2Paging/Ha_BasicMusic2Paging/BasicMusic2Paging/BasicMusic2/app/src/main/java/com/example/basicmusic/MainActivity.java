@@ -48,7 +48,7 @@ import io.reactivex.rxjava3.functions.Consumer;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
-    NavigationView mNavView;
+    public NavigationView mNavView;
     ImageButton btnMore;
     NavController mNavController;
 

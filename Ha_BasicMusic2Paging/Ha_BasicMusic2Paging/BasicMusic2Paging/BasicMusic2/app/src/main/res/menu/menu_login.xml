@@ -19,15 +19,9 @@
             android:icon="@drawable/ic_baseline_mvplay_24" />
         <item android:title="Other">
             <menu>
-                <item android:title="Login"
-                    android:id="@+id/item_login"
-                    android:icon="@drawable/settings_new_24"
-                    android:visible="true"
-                    app:showAsAction="always"/>
                 <item android:title="Cá Nhân"
                     android:id="@+id/item_profile"
-                    android:visible="false"
-                    android:icon="@drawable/person_24"
+                    android:icon="@drawable/settings_new_24"
                     app:showAsAction="always"/>
                 <item android:title="setting"
                     android:id="@+id/item_setting"
