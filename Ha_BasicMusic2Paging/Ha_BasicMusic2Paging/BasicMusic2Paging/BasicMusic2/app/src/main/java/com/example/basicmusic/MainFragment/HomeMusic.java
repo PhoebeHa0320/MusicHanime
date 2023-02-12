@@ -57,6 +57,11 @@ public class HomeMusic extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        categoryAdapter = new CategoryAdapter(getContext(), new ArrayList<>());
+        homebinding.rcvCategory.setAdapter(categoryAdapter);
+
+        singerAdapter = new SingerAdapter(getContext(), new ArrayList<>());
+        homebinding.rcvSinger.setAdapter(singerAdapter);
         imageSlider = homebinding.imageSlider;
 //        progressDialog = new ProgressDialog(getActivity());
 //        progressDialog.setTitle("Chào mừng bạn đến với MusicApp!");
@@ -92,12 +97,7 @@ public class HomeMusic extends Fragment {
                 }
                 Log.d("size", "onDataChange: "+singerList.size());
                 //setAdapter Recycle view
-                singerAdapter = new SingerAdapter(getContext(), singerList) ;
-
-
-
-                homebinding.rcvSinger.setAdapter(singerAdapter);
-                singerAdapter.notifyDataSetChanged();
+                singerAdapter.setData(singerList);
             }
 
             @Override
@@ -144,9 +144,7 @@ public class HomeMusic extends Fragment {
 
 
                 //setAdapter Recycle view
-                categoryAdapter = new CategoryAdapter(getContext(), categoryList);
-                homebinding.rcvCategory.setAdapter(categoryAdapter);
-                categoryAdapter.notifyDataSetChanged();
+                categoryAdapter.setData(categoryList);
             }
 
             @Override

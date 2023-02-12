@@ -1,7 +1,7 @@
 package com.example.basicmusic.Admin.ModelAdmin;
 
 public class CategoryMusic {
-    private String id, nameCategory,url_image,uid;
+    private String id, title, url,uid;
     long timestamp;
 
     public CategoryMusic() {
@@ -9,8 +9,8 @@ public class CategoryMusic {
 
     public CategoryMusic(String id, String nameCategory, String url_image) {
         this.id = id;
-        this.nameCategory = nameCategory;
-        this.url_image = url_image;
+        this.title = nameCategory;
+        this.url = url_image;
 
     }
 //
@@ -35,20 +35,20 @@ public class CategoryMusic {
         this.id = id;
     }
 
-    public String getNameCategory() {
-        return nameCategory;
+    public String getTitle() {
+        return title;
     }
 
-    public void setNameCategory(String nameCategory) {
-        this.nameCategory = nameCategory;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getUrl_image() {
-        return url_image;
+    public String getUrl() {
+        return url;
     }
 
-    public void setUrl_image(String url_image) {
-        this.url_image = url_image;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getUid() {

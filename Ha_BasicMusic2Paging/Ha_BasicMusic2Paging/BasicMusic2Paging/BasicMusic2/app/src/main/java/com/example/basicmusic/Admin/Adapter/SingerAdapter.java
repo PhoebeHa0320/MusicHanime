@@ -37,6 +37,10 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.SingerView
         mFirebaseAuth =  FirebaseAuth.getInstance();
     }
 
+    public void setData(List<Singer> arrayListSinger){
+        this.arrayListSinger = arrayListSinger;
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -69,7 +73,7 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.SingerView
     private void loadDetailsSinger(Singer singer, SingerViewHolder holder) {
 //        Log.d(TAG, "loadUserInfo:Đang tải dữ liệu "+mFirebaseAuth.getUid());
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("SingerMusic");
-        ref.child(mFirebaseAuth.getUid())
+        ref.child(singer.getId())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

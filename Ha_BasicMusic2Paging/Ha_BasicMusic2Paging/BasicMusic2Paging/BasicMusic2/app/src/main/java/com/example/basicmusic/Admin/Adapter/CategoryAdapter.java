@@ -37,6 +37,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     }
 
+    public void setData(List<CategoryMusic> arrlistCategory){
+        this.arrlistCategory = arrlistCategory;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -58,34 +63,39 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
     private void loadDetailCategory(CategoryMusic category, CategoryViewHolder holder) {
+        holder.titleCategory.setText(category.getTitle());
+        Glide.with(context)
+                .load(category.getUrl())
+                .placeholder(R.drawable.person_24)
+                .into(holder.categoryPickture);
         //        Log.d(TAG, "loadUserInfo:Đang tải dữ liệu "+mFirebaseAuth.getUid());
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("CategoryMusic");
-        ref.child(mFirebaseAuth.getUid())
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //get all info user here from snapshot
-                        String fullName = ""+snapshot.child("title").getValue();
-
-                        String profileImage = "" + snapshot.child("url").getValue();
-
-
-
-                        //setdatato ui
-                        categoryitembin.categoryTv.setText(fullName);
-
-                        //set image ,using glide
-                        Glide.with(context)
-                                .load(profileImage)
-                                .placeholder(R.drawable.person_24)
-                                .into(holder.categoryPickture);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("CategoryMusic");
+//        ref.child(category.getId())
+//                .addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        //get all info user here from snapshot
+//                        String fullName = ""+snapshot.child("title").getValue();
+//
+//                        String profileImage = "" + snapshot.child("url").getValue();
+//
+//
+//
+//                        //setdatato ui
+//                        categoryitembin.categoryTv.setText(fullName);
+//
+//                        //set image ,using glide
+//                        Glide.with(context)
+//                                .load(profileImage)
+//                                .placeholder(R.drawable.person_24)
+//                                .into(holder.categoryPickture);
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
     }
 
     @Override
