@@ -23,18 +23,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.SingerViewHolder> {
 
     private Context context;
-    private ArrayList<Singer> arrayListSinger;
+    private     List<Singer> arrayListSinger;
     private SingerItemBinding singerbin;
     private FirebaseAuth mFirebaseAuth;
-    public SingerAdapter(Context context, ArrayList<Singer> arrayListSinger) {
+    public SingerAdapter(Context context, List<Singer> arrayListSinger) {
         this.context = context;
         this.arrayListSinger = arrayListSinger;
         mFirebaseAuth =  FirebaseAuth.getInstance();
     }
+
 
     @NonNull
     @Override
@@ -48,7 +50,7 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.SingerView
     public void onBindViewHolder(@NonNull SingerViewHolder holder, int position) {
         Singer singer = arrayListSinger.get(position);
 
-        String title = singer.getNameSinger();
+//        String title = singer.getNameSinger();
 
 
 
@@ -93,33 +95,7 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.SingerView
 
                     }
                 });
-//        String uid  = singer.getUid();
-//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("SingerMusic");
-//        ref.child(uid)
-//                .addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        //set Data
-//                        String name = "" +snapshot.child("title").getValue();
-//                        String profileimage = ""+snapshot.child("url").getValue();
-//                        //setData
-//                        holder.nameSingerTv.setText(name);
-//                        try {
-//                            Glide.with(context)
-//                                    .load(profileimage)
-//                                    .placeholder(R.drawable.person_24)
-//                                    .into(holder.singerPickture);
-//                        }catch(Exception e){
-//                            holder.singerPickture.setImageResource(R.drawable.person_24);
-//                        }
-//                        Log.d("anh", "onDataChange: "+profileimage);
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
+
     }
 
     @Override
@@ -136,5 +112,4 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.SingerView
             singerPickture = singerbin.singerIv;
             nameSingerTv = singerbin.singerTv;
         }
-    }
-}
+    }}

@@ -93,6 +93,7 @@
         android:id="@+id/navView"
         android:layout_width="200dp"
         android:layout_height="match_parent"
+        android:keyboardNavigationCluster="true"
         app:menu="@menu/nav_menu"
         app:headerLayout="@layout/header_nav"
         android:layout_gravity="start"

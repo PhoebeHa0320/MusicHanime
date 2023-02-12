@@ -24,14 +24,10 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.basicmusic.Admin.Adapter.SingerAdapter;
-import com.example.basicmusic.Admin.Adapter.SingerRcvAdapter;
 import com.example.basicmusic.Admin.ModelAdmin.Singer;
 import com.example.basicmusic.databinding.SingerFragmentBinding;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;

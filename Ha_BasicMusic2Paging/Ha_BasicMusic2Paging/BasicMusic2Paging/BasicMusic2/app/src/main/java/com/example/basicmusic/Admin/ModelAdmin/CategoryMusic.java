@@ -7,13 +7,17 @@ public class CategoryMusic {
     public CategoryMusic() {
     }
 
-    public CategoryMusic(String id, String nameCategory, String url_image, String uid, long timestamp) {
+    public CategoryMusic(String id, String nameCategory, String url_image) {
         this.id = id;
         this.nameCategory = nameCategory;
         this.url_image = url_image;
-        this.uid = uid;
-        this.timestamp = timestamp;
+
     }
+//
+//    public CategoryMusic(String nameCategory, String url_image) {
+//        this.nameCategory = nameCategory;
+//        this.url_image = url_image;
+//    }
 
     public long getTimestamp() {
         return timestamp;

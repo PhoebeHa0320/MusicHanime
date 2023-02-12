@@ -5,14 +5,22 @@ package com.example.basicmusic.Admin.ModelAdmin;
 public class Singer {
     private String id, nameSinger,url_image,uid;
     long timestamp;
+    //contructor null
 
-    public Singer(String id, String nameSinger, String url_image, String uid,  long timestamp) {
+    public Singer() {
+    }
+//
+    public Singer(String id, String nameSinger, String url_image) {
         this.id = id;
         this.nameSinger = nameSinger;
         this.url_image = url_image;
-        this.uid = uid;
-        this.timestamp = timestamp;
+
     }
+
+//    public Singer(String nameSinger, String url_image) {
+//        this.nameSinger = nameSinger;
+//        this.url_image = url_image;
+//    }
 
     public long getTimestamp() {
         return timestamp;
