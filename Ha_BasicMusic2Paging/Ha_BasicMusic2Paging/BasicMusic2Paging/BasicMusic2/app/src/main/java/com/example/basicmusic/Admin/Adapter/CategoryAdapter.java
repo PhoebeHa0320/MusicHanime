@@ -14,13 +14,14 @@ import com.example.basicmusic.databinding.CategoryItemBinding;
 import com.google.android.material.imageview.ShapeableImageView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>{
     private Context context;
-    private ArrayList<CategoryMusic> arrlistCategory;
+    private List<CategoryMusic> arrlistCategory;
     private CategoryItemBinding categoryitembin;
 
-    public CategoryAdapter(Context context, ArrayList<CategoryMusic> arrlistCategory) {
+    public CategoryAdapter(Context context, List<CategoryMusic> arrlistCategory) {
         this.context = context;
         this.arrlistCategory = arrlistCategory;
     }

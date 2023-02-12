@@ -3,14 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <group android:checkableBehavior="single">
         <item android:id="@+id/item_home"
-            android:title="Home Music"
+            android:title="Trang chủ"
             android:icon="@drawable/home_24" />
         <item android:id="@+id/item_library"
-            android:title="My Library"
+            android:title="Thư viện nhạc"
             android:icon="@drawable/music_24" />
         <item android:id="@+id/item_playlist"
-            android:title="My Playlist"
+            android:title="Danh sách phát nhạc"
             android:icon="@drawable/note_24" />
+        <item android:id="@+id/item_like"
+            android:title="Bài hát yêu thích"
+            android:icon="@drawable/ic_baseline_favorite_24" />
+        <item android:id="@+id/item_video"
+            android:title="MV ca nhạc"
+            android:icon="@drawable/ic_baseline_mvplay_24" />
         <item android:title="Other">
             <menu>
                 <item android:title="Login"
