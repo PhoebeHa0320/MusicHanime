@@ -66,42 +66,49 @@
                 android:paddingLeft="10dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout_Categories"
+
+
+        <TextView
+            android:id="@+id/tvCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/layout_Title"
-            android:layout_margin="10dp"
-            android:hint="Tên Thể Loại">
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:drawableStart="@drawable/ic_baseline_category_24"
+            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+            android:drawablePadding="10dp"
+            android:hint="Thể Loại"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etTitleCategory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:paddingLeft="10dp" />
-        </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout_Singer"
+
+
+        <TextView
+            android:id="@+id/tvTitleSinger"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/layout_Categories"
-            android:layout_margin="10dp"
-            android:hint="Tên Nghệ sĩ">
+            android:layout_below="@id/tvCategory"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:drawableStart="@drawable/ic_baseline_category_24"
+            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+            android:drawablePadding="10dp"
+            android:hint="Nghệ sỹ"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etTitleSinger"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:paddingLeft="10dp" />
-        </com.google.android.material.textfield.TextInputLayout>
         <LinearLayout
             android:id="@+id/layout_btn"
             android:layout_width="match_parent"
             android:orientation="horizontal"
-            android:layout_below="@id/layout_Singer"
+            android:layout_below="@id/tvTitleSinger"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:layout_height="wrap_content">
             <Button

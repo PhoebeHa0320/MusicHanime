@@ -3,6 +3,7 @@ package com.example.basicmusic.Admin.FragmentAdmin;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,10 +23,18 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.example.basicmusic.databinding.AddFileMp3Binding;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class addFileMp3 extends Fragment {
     AddFileMp3Binding addFileMp3Binding;
@@ -33,6 +42,10 @@ public class addFileMp3 extends Fragment {
     private Uri imageUri = null;
     private ProgressDialog progressDialog;
     private static final String TAG ="SINGER_IV";
+
+    //arraylist to hold pdf categories
+    ArrayList<String> categoriesTitleArrayList,CategoryIdArrayList;
+    ArrayList<String> singerTitleArrayList,singerIdArrayList;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,12 +76,145 @@ public class addFileMp3 extends Fragment {
         addFileMp3Binding.imgFileMp.setOnClickListener(v -> {
             selectFileMp3();
         });
+        addFileMp3Binding.tvCategory.setOnClickListener(v ->{
+            categoryPickDialog();
+        });
+        addFileMp3Binding.tvTitleSinger.setOnClickListener(v ->{
+            SingerPickDialog();
+        });
+        loadCategory();
+        loadSinger();
         //setup progress dialog
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setTitle("Please wait..");
         progressDialog.setCanceledOnTouchOutside(false);
 
 
+    }
+    private  String selectedCategoryId,selectedCategoryTitle;
+    private  String selectedSingerId,selectedSingerTitle;
+    private void SingerPickDialog() {
+//        //first we nedd to get category from firebase
+//        Log.d(TAG, "categoryPickDialog: showlog category pick dialog");
+        //get String array of categories from arraylist
+        String[] singerArray = new String[singerTitleArrayList.size()];
+        for(int i= 0;i<singerTitleArrayList.size();i++){
+            singerArray[i] = singerTitleArrayList.get(i);
+
+
+        }
+        //Alert Dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        builder.setTitle("Chọn Nghệ sỹ")
+                .setItems(singerArray, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        //handle item click
+                        //get clicked item from list
+                        selectedSingerTitle = singerTitleArrayList.get(which);
+                        selectedSingerId = singerIdArrayList.get(which);
+
+                        //set to category textView
+                        addFileMp3Binding.tvTitleSinger.setText(selectedSingerTitle);
+//                        Log.d("category", "onClick: "+category);
+
+                    }
+                })
+                .show();
+
+    }
+    private void categoryPickDialog() {
+//        //first we nedd to get category from firebase
+//        Log.d(TAG, "categoryPickDialog: showlog category pick dialog");
+        //get String array of categories from arraylist
+        String[] categoriesArray = new String[categoriesTitleArrayList.size()];
+        for(int i= 0;i<categoriesTitleArrayList.size();i++){
+            categoriesArray[i] = categoriesTitleArrayList.get(i);
+
+
+        }
+        //Alert Dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        builder.setTitle("Pick Category")
+                .setItems(categoriesArray, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        //handle item click
+                        //get clicked item from list
+                        selectedCategoryTitle  = categoriesTitleArrayList.get(which);
+                        selectedCategoryId = CategoryIdArrayList.get(which);
+
+                        //set to category textView
+                        addFileMp3Binding.tvCategory.setText(selectedCategoryTitle);
+//                        Log.d("category", "onClick: "+category);
+
+                    }
+                })
+                .show();
+
+    }
+    private void loadSinger() {
+        Log.d(TAG, "load Singer: Loading");
+        singerTitleArrayList = new ArrayList<>();
+        singerIdArrayList = new ArrayList<>();
+        //db refenrence to load categories > Categories
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("SingerMusic");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                singerTitleArrayList.clear();//clear before adding data
+                singerIdArrayList.clear();
+                for(DataSnapshot ds:snapshot.getChildren()){
+                    //get id and title category
+                    String categoryId =""+ds.child("id").getValue();
+                    String categoryTitle =""+ds.child("title").getValue();
+                    //add to respective arraylist
+                    singerTitleArrayList.add(categoryTitle);
+                    singerIdArrayList.add(categoryId);
+                    Log.d(">>", "onDataChange: "+singerTitleArrayList);
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void loadCategory() {
+        Log.d(TAG, "loadCategory: Loading");
+        categoriesTitleArrayList = new ArrayList<>();
+        CategoryIdArrayList = new ArrayList<>();
+        //db refenrence to load categories > Categories
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("CategoryMusic");
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                categoriesTitleArrayList.clear();//clear before adding data
+                CategoryIdArrayList.clear();
+                for(DataSnapshot ds:snapshot.getChildren()){
+                    //get id and title category
+                    String categoryId =""+ds.child("id").getValue();
+                    String categoryTitle =""+ds.child("title").getValue();
+                    //add to respective arraylist
+                    categoriesTitleArrayList.add(categoryTitle);
+                    CategoryIdArrayList.add(categoryId);
+                    Log.d(">>", "onDataChange: "+categoriesTitleArrayList);
+
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void selectFileMp3() {
