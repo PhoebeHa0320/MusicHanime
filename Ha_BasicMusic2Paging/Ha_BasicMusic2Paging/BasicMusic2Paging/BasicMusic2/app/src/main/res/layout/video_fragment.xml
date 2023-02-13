@@ -38,4 +38,22 @@
             android:layout_height="match_parent"
             />
     </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:id="@+id/btnChooseVideo"
+        android:layout_width="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@id/layout_ev"
+        android:text="Chọn Video"
+        android:layout_height="56dp" />
+
+    <Button
+        android:id="@+id/btnUpdateVideo"
+        android:layout_width="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_below="@id/btnChooseVideo"
+        android:text="Them Video"
+        android:layout_height="56dp" />
+
 </RelativeLayout>

@@ -86,7 +86,7 @@ public class homeAdmin extends Fragment {
             getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.userContainer,user);
         });
         homeadminbinding.btnManagerVideo.setOnClickListener(v->{
-            mNavController.navigate(R.id.action_homeAdmin_to_addFileMp32);
+            mNavController.navigate(R.id.action_homeAdmin_to_videoFragment);
             //  start
             VideoFragment video = new VideoFragment();
             //  end
