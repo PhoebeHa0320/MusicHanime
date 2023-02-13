@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
     public NavigationView mNavView;
     ImageButton btnMore;
     NavController mNavController;
-    private SongAdapter mAdapter;
     MusicRepository mMusicRepository = new MusicRepository();
 
 
@@ -111,9 +110,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-        mAdapter = new SongAdapter(this, new MusicComparator());
-
     }
     @Override
     public void onResume() {
@@ -132,12 +128,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void doRetrieveAllSong() {
-
-        mAdapter.isLocal = true;
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+            requestPermissions(new String[] { Manifest.permission.READ_EXTERNAL_STORAGE }, 999);
+        }
         mMusicRepository.getLocalMusic(getBaseContext()).observe(this, new Observer<List<Music>>() {
             @Override
             public void onChanged(List<Music> music) {
-                mAdapter.setData(music);
             }
         });
     }
