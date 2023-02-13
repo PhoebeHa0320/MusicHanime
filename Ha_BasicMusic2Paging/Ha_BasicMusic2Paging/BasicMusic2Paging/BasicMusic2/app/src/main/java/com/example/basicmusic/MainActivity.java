@@ -36,6 +36,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.basicmusic.ViewModel.MainActivityViewModel;
 import com.example.basicmusic.data.Music;
 import com.example.basicmusic.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationView;
@@ -51,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
     public NavigationView mNavView;
     ImageButton btnMore;
     NavController mNavController;
+    private SongAdapter mAdapter;
+    private MainActivityViewModel mViewModel;
 
 
     @Override
@@ -90,6 +93,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.item_playlist:
                         mNavController.navigate(R.id.playlistMusic);
                         break;
+                    case R.id.item_video:
+                        mNavController.navigate(R.id.playMv);
+                        break;
                     case R.id.item_login:
                         mNavController.navigate(R.id.loginMusic);
                         break;
@@ -106,6 +112,32 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        doRetrieveAllSong();
+//    }
+//
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        if (requestCode == 999) {
+//            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+//                doRetrieveAllSong();
+//            }
+//        }
+//    }
+//
+//    private void doRetrieveAllSong() {
+//
+//        mAdapter.isLocal = true;
+//        mViewModel.getLocalMusic(getBaseContext()).observe(this, new Observer<List<Music>>() {
+//            @Override
+//            public void onChanged(List<Music> music) {
+//                mAdapter.setData(music);
+//            }
+//        });
+//    }
 
 
 }

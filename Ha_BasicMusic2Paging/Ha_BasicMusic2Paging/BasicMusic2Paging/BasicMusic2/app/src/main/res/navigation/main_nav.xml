@@ -33,6 +33,10 @@
         android:name="com.example.basicmusic.MainFragment.PlaylistMusic"
         android:label="PlaylistMusic" />
     <fragment
+        android:id="@+id/playMv"
+        android:name="com.example.basicmusic.MainFragment.PlayMv"
+        android:label="PlayMv" />
+    <fragment
         android:id="@+id/loginMusic"
         android:name="com.example.basicmusic.MainFragment.LoginMusic"
         android:label="LoginMusic" >

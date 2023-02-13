@@ -45,5 +45,4 @@ public class MainActivityViewModel extends ViewModel {
     public LiveData<List<Music>> getLocalMusic(Context context){
         return mMusicRepository.getLocalMusic(context);
     }
-
 }
