@@ -3,7 +3,7 @@ package com.example.basicmusic.Admin.ModelAdmin;
 
 
 public class Singer {
-    private String id, nameSinger,url_image,uid;
+    private String id, title,url,uid;
     long timestamp;
     //contructor null
 
@@ -12,8 +12,8 @@ public class Singer {
 //
     public Singer(String id, String nameSinger, String url_image) {
         this.id = id;
-        this.nameSinger = nameSinger;
-        this.url_image = url_image;
+        this.title = nameSinger;
+        this.url = url_image;
 
     }
 
@@ -22,13 +22,6 @@ public class Singer {
 //        this.url_image = url_image;
 //    }
 
-    public long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
-    }
 
     public String getId() {
         return id;
@@ -38,20 +31,20 @@ public class Singer {
         this.id = id;
     }
 
-    public String getNameSinger() {
-        return nameSinger;
+    public String getTitle() {
+        return title;
     }
 
-    public void setNameSinger(String nameSinger) {
-        this.nameSinger = nameSinger;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getUrl_image() {
-        return url_image;
+    public String getUrl() {
+        return url;
     }
 
-    public void setUrl_image(String url_image) {
-        this.url_image = url_image;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getUid() {
@@ -60,5 +53,13 @@ public class Singer {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }

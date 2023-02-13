@@ -92,10 +92,11 @@ public class HomeMusic extends Fragment {
                     //get Data
                     Singer model = ds.getValue(Singer.class);
                     //add arraylist
+                    Log.d(">>>", "singer: "+model.getUrl());
+
                     singerList.add(model);
 
                 }
-                Log.d("size", "onDataChange: "+singerList.size());
                 //setAdapter Recycle view
                 singerAdapter.setData(singerList);
             }
@@ -135,6 +136,8 @@ public class HomeMusic extends Fragment {
                 for(DataSnapshot ds:snapshot.getChildren()){
                     //get Data
                     CategoryMusic model = ds.getValue(CategoryMusic.class);
+                    Log.d(">>>", "gen "+model.getUrl());
+
                     //add arraylist
                     categoryList.add(model);
 

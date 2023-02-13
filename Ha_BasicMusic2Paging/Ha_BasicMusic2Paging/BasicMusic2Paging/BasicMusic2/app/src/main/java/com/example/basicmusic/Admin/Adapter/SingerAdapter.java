@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -53,6 +54,8 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.SingerView
     @Override
     public void onBindViewHolder(@NonNull SingerViewHolder holder, int position) {
         Singer singer = arrayListSinger.get(position);
+        Log.d(">>>", "onDataChangeview: "+arrayListSinger.get(position));
+
 
 //        String title = singer.getNameSinger();
 
@@ -71,34 +74,39 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.SingerView
     }
 
     private void loadDetailsSinger(Singer singer, SingerViewHolder holder) {
-//        Log.d(TAG, "loadUserInfo:Đang tải dữ liệu "+mFirebaseAuth.getUid());
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("SingerMusic");
-        ref.child(singer.getId())
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //get all info user here from snapshot
-                        String fullName = ""+snapshot.child("title").getValue();
-
-                        String profileImage = "" + snapshot.child("url").getValue();
-
-
-
-                        //setdatato ui
-                        singerbin.singerTv.setText(fullName);
-
-                        //set image ,using glide
-                        Glide.with(context)
-                                .load(profileImage)
-                                .placeholder(R.drawable.person_24)
-                                .into(singerbin.singerIv);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+        holder.nameSingerTv.setText(singer.getTitle());
+        Glide.with(context)
+                .load(singer.getUrl())
+                .placeholder(R.drawable.person_24)
+                .into(holder.singerPickture);
+////        Log.d(TAG, "loadUserInfo:Đang tải dữ liệu "+mFirebaseAuth.getUid());
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("SingerMusic");
+//        ref.child(singer.getId())
+//                .addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        //get all info user here from snapshot
+//                        String fullName = ""+snapshot.child("title").getValue();
+//
+//                        String profileImage = "" + snapshot.child("url").getValue();
+//
+//
+//
+//                        //setdatato ui
+//                        singerbin.singerTv.setText(fullName);
+//
+//                        //set image ,using glide
+//                        Glide.with(context)
+//                                .load(profileImage)
+//                                .placeholder(R.drawable.person_24)
+//                                .into(singerbin.singerIv);
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
 
     }
 
@@ -109,7 +117,7 @@ public class SingerAdapter extends RecyclerView.Adapter<SingerAdapter.SingerView
 
     class SingerViewHolder extends RecyclerView.ViewHolder {
 
-        ShapeableImageView singerPickture;
+        ImageView singerPickture;
         TextView nameSingerTv;
         public SingerViewHolder(@NonNull View itemView) {
             super(itemView);
