@@ -32,7 +32,7 @@ import java.util.List;
 public class SongAdapter extends PagingDataAdapter<Music, SongAdapter.SongViewHolder> {
     private final Context mContext;
     private final MusicController mMusicController;
-    boolean isLocal = true;
+    public boolean isLocal = true;
     private List<Music> mData = new ArrayList<>();
 
     public void setData(List<Music> data){

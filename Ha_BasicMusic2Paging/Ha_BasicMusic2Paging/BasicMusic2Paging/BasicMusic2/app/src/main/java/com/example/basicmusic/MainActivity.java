@@ -39,6 +39,7 @@ import android.widget.ImageButton;
 import com.example.basicmusic.ViewModel.MainActivityViewModel;
 import com.example.basicmusic.data.Music;
 import com.example.basicmusic.databinding.ActivityMainBinding;
+import com.example.basicmusic.repo.MusicRepository;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton btnMore;
     NavController mNavController;
     private SongAdapter mAdapter;
-    private MainActivityViewModel mViewModel;
+    MusicRepository mMusicRepository = new MusicRepository();
 
 
     @Override
@@ -111,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mAdapter = new SongAdapter(this, new MusicComparator());
+
     }
     @Override
     public void onResume() {
@@ -131,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
     private void doRetrieveAllSong() {
 
         mAdapter.isLocal = true;
-        mViewModel.getLocalMusic(getBaseContext()).observe(this, new Observer<List<Music>>() {
+        mMusicRepository.getLocalMusic(getBaseContext()).observe(this, new Observer<List<Music>>() {
             @Override
             public void onChanged(List<Music> music) {
                 mAdapter.setData(music);

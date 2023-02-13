@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.Observer;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,6 +43,8 @@ public class NotificationActivity extends AppCompatActivity {
     private ImageButton mNext;
 
     private NotificationMusic mNotificationMusic;
+
+    MusicRepository mMusicRepository = new MusicRepository();
 
     private ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
@@ -168,10 +171,18 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
     private void doRetrieveAllSong() {
-        MediaHelper.retrieveAllSong(this, new MediaHelper.OnFinishRetrieve() {
+//        MediaHelper.retrieveAllSong(this, new MediaHelper.OnFinishRetrieve() {
+//            @Override
+//            public void onFinish(List<Song> list) {
+//                mNotificationMusic.setData(list);
+//            }
+//        });
+
+        mAdapter.isLocal = true;
+        mMusicRepository.getLocalMusic(getBaseContext()).observe(this, new Observer<List<Music>>() {
             @Override
-            public void onFinish(List<Song> list) {
-                mNotificationMusic.setData(list);
+            public void onChanged(List<Music> music) {
+                mAdapter.setData(music);
             }
         });
     }
