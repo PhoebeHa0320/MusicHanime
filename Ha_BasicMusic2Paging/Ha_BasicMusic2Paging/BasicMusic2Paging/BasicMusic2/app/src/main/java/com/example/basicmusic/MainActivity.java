@@ -112,32 +112,32 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        doRetrieveAllSong();
-//    }
-//
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        if (requestCode == 999) {
-//            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-//                doRetrieveAllSong();
-//            }
-//        }
-//    }
-//
-//    private void doRetrieveAllSong() {
-//
-//        mAdapter.isLocal = true;
-//        mViewModel.getLocalMusic(getBaseContext()).observe(this, new Observer<List<Music>>() {
-//            @Override
-//            public void onChanged(List<Music> music) {
-//                mAdapter.setData(music);
-//            }
-//        });
-//    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        doRetrieveAllSong();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 999) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                doRetrieveAllSong();
+            }
+        }
+    }
+
+    private void doRetrieveAllSong() {
+
+        mAdapter.isLocal = true;
+        mViewModel.getLocalMusic(getBaseContext()).observe(this, new Observer<List<Music>>() {
+            @Override
+            public void onChanged(List<Music> music) {
+                mAdapter.setData(music);
+            }
+        });
+    }
 
 
 }
