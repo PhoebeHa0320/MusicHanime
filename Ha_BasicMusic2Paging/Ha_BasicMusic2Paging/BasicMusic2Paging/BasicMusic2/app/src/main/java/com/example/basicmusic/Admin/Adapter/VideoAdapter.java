@@ -54,7 +54,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoViewHol
         holder.videoView.setVideoURI(uri);
         mediaController = new MediaController(context);
         holder.videoView.setMediaController(mediaController);
-        holder.videoView.start();
+//        holder.videoView.start();
 
 
     }

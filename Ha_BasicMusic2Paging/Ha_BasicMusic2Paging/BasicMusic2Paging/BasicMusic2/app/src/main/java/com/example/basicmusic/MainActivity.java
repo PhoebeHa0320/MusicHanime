@@ -93,8 +93,10 @@ public class MainActivity extends AppCompatActivity {
         mNavView = binding.navView;
         View hView =mNavView.getHeaderView(0);
         Email = hView.findViewById(R.id.emailName);
-        email = mUser.getEmail();
-        Email.setText(email);
+        if(mUser != null) {
+            email = mUser.getEmail();
+            Email.setText(email);
+        }
         mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
