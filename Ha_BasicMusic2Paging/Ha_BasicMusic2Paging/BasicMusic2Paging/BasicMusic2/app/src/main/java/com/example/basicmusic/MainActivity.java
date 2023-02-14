@@ -35,12 +35,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.basicmusic.ViewModel.MainActivityViewModel;
 import com.example.basicmusic.data.Music;
 import com.example.basicmusic.databinding.ActivityMainBinding;
 import com.example.basicmusic.repo.MusicRepository;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -54,7 +58,10 @@ public class MainActivity extends AppCompatActivity {
     ImageButton btnMore;
     NavController mNavController;
     MusicRepository mMusicRepository = new MusicRepository();
-
+    FirebaseAuth mFirebaseAuth;
+    FirebaseUser mUser;
+    String email;
+    TextView Email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Intent myIntent = getIntent(); // gets the previously created intent
+        String firstKeyName = myIntent.getStringExtra("LOGIN"); // will return "FirstKeyValue"
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mUser = mFirebaseAuth.getCurrentUser();
         NavHostFragment navHostFragment =
                 (NavHostFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.idFragmentContainer);
@@ -80,6 +91,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         mNavView = binding.navView;
+        View hView =mNavView.getHeaderView(0);
+        Email = hView.findViewById(R.id.emailName);
+        email = mUser.getEmail();
+        Email.setText(email);
         mNavView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -93,8 +108,14 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.item_playlist:
                         mNavController.navigate(R.id.playlistMusic);
                         break;
+                    case R.id.item_video:
+                        mNavController.navigate(R.id.videoUserFragment2);
+                        break;
                     case R.id.item_login:
                         mNavController.navigate(R.id.loginMusic);
+                        break;
+                    case R.id.item_profile:
+                        mNavController.navigate(R.id.profileUserFragment);
                         break;
                     case R.id.item_setting:
                         mNavController.navigate(R.id.settingMusic);
@@ -107,6 +128,16 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        Log.d(">>","Login:"+firstKeyName);
+        if (firstKeyName != null){
+            Menu nav_Menu = mNavView.getMenu();
+            MenuItem target = nav_Menu.findItem(R.id.item_login);
+            MenuItem profile = nav_Menu.findItem(R.id.item_profile);
+            target.setVisible(false);
+            profile.setVisible(true);
+            Toast.makeText(this, "Xoá thành công", Toast.LENGTH_SHORT).show();
+        }
+
     }
     @Override
     public void onResume() {

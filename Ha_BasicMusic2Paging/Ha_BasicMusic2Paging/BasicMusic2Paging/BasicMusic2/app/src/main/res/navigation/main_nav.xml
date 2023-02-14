@@ -52,7 +52,15 @@
             android:id="@+id/action_registerMusic_to_loginMusic"
             app:destination="@id/loginMusic" />
     </fragment>
-<!--    <fragment-->
+    <fragment
+        android:id="@+id/profileUserFragment"
+        android:name="com.example.basicmusic.MainFragment.ProfileUserFragment"
+        android:label="ProfileUserFragment" />
+    <fragment
+        android:id="@+id/videoUserFragment2"
+        android:name="com.example.basicmusic.MainFragment.VideoUserFragment"
+        android:label="VideoUserFragment" />
+    <!--    <fragment-->
 <!--        android:id="@+id/fragmentContainer"-->
 <!--        android:name="com.example.basicmusic.MainFragment.FragmentContainer"-->
 <!--        android:label="FragmentContainer" >-->

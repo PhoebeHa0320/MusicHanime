@@ -115,7 +115,7 @@ public class LoginMusic extends Fragment {
                         if(userType.equals("user")){
                             //this is simple user ,open user dashboard
                             Intent intent = new Intent(requireActivity(),MainActivity.class);
-
+                            intent.putExtra("LOGIN","SUCCESS");
                             startActivity(intent);
 
                         }else if(userType.equals("admin")){
