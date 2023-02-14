@@ -8,15 +8,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import com.example.basicmusic.R;
-import com.example.basicmusic.SongDetailsFragment;
+import androidx.fragment.app.Fragment;
 import com.example.basicmusic.databinding.FragmentListMusicBinding;
-import com.example.basicmusic.databinding.FragmentMvplayBinding;
-import com.example.basicmusic.databinding.SongFragmentDetailBinding;
 
-public class PlayMv extends Fragment {
-    FragmentMvplayBinding fragmentMvplayBinding;
+
+
+public class LibraryMusic extends Fragment {
+    FragmentListMusicBinding librarybinding;
     @Override
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,8 +30,8 @@ public class PlayMv extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        fragmentMvplayBinding = FragmentMvplayBinding.inflate(inflater,container,false);
-        return fragmentMvplayBinding.getRoot();
+        librarybinding = FragmentListMusicBinding.inflate(inflater, container, false);
+        return librarybinding.getRoot();
 
 }}
 

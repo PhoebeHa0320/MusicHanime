@@ -93,9 +93,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.item_playlist:
                         mNavController.navigate(R.id.playlistMusic);
                         break;
-                    case R.id.item_video:
-                        mNavController.navigate(R.id.playMv);
-                        break;
                     case R.id.item_login:
                         mNavController.navigate(R.id.loginMusic);
                         break;
