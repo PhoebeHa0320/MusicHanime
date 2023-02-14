@@ -55,7 +55,11 @@
     <fragment
         android:id="@+id/profileUserFragment"
         android:name="com.example.basicmusic.MainFragment.ProfileUserFragment"
-        android:label="ProfileUserFragment" />
+        android:label="ProfileUserFragment" >
+        <action
+            android:id="@+id/action_profileUserFragment_to_loginMusic"
+            app:destination="@id/loginMusic" />
+    </fragment>
     <fragment
         android:id="@+id/videoUserFragment2"
         android:name="com.example.basicmusic.MainFragment.VideoUserFragment"
