@@ -131,14 +131,14 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-        Log.d(">>","Login:"+firstKeyName);
+
         if (firstKeyName != null){
             Menu nav_Menu = mNavView.getMenu();
             MenuItem target = nav_Menu.findItem(R.id.item_login);
             MenuItem profile = nav_Menu.findItem(R.id.item_profile);
             target.setVisible(false);
             profile.setVisible(true);
-            Toast.makeText(this, "Xoá thành công", Toast.LENGTH_SHORT).show();
+
         }
         if (firstKeyNameLogout != null){
             Menu nav_Menu = mNavView.getMenu();
@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
             MenuItem profile = nav_Menu.findItem(R.id.item_profile);
             target.setVisible(true);
             profile.setVisible(false);
-            Toast.makeText(this, "Xoá thành công", Toast.LENGTH_SHORT).show();
+
         }
 
     }
