@@ -49,7 +49,6 @@ public class Register extends Fragment {
         mNavController =
                 Navigation.findNavController(requireActivity(), R.id.idFragmentContainer);
         registerbinding.btnRegister.setOnClickListener(v ->{
-
             validateData();
         });
 

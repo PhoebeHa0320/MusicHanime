@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/containerfileMp3"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -28,33 +29,58 @@
             android:textColor="@color/black"
             android:textSize="18sp" />
 
-        <ImageView
-            android:id="@+id/imgFileMp"
+        <TextView
+            android:id="@+id/chooseFile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Chọn File Nhạc"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="24sp"
             android:layout_below="@id/tvTitleCategory"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="7dp"
-            android:src="@drawable/mpzing" />
+            />
 
-        <ImageView
-            android:id="@+id/imgSimger"
-            android:layout_width="100dp"
-            android:layout_height="120dp"
-           android:layout_toEndOf="@id/imgFileMp"
-            android:layout_below="@id/tvTitleCategory"
-            android:layout_marginStart="40dp"
+            <Button
+                android:id="@+id/btnUploadMp"
+                android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:layout_height="wrap_content"
+                android:text="Tải File"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@id/chooseFile"
+                />
+            <TextView
+                android:id="@+id/nameFileMp3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tên File Nhạc"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:padding="12dp"
+                android:textColor="@color/black"
+                android:layout_below="@id/chooseFile"
+                android:layout_toEndOf="@id/btnUploadMp"
+                android:textSize="10sp"
+                />
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_below="@id/nameFileMp3"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/rem" />
-
-
+            />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layout_Title"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/imgSimger"
+            android:layout_below="@id/progressbar"
             android:layout_margin="10dp"
             android:hint="Tên bài hát">
 
@@ -135,8 +161,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/layout_header"
-        android:layout_margin="10dp"
-         />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        tools:listitem="@layout/mp3_item"
+        android:layout_marginBottom="10dp" />
 
 
 </RelativeLayout>

@@ -1,20 +1,33 @@
 package com.example.basicmusic.Admin.FragmentAdmin;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
+import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -26,15 +39,27 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.example.basicmusic.Admin.ModelAdmin.ModelMusic;
+import com.example.basicmusic.Admin.ModelAdmin.VideoModel;
+import com.example.basicmusic.FileUtils;
+import com.example.basicmusic.R;
 import com.example.basicmusic.databinding.AddFileMp3Binding;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class addFileMp3 extends Fragment {
     AddFileMp3Binding addFileMp3Binding;
@@ -42,14 +67,18 @@ public class addFileMp3 extends Fragment {
     private Uri imageUri = null;
     private ProgressDialog progressDialog;
     private static final String TAG ="SINGER_IV";
-
-    //arraylist to hold pdf categories
+    //uri of picked pdf
+    Uri AudioUri;
+    private final int PICK_AUDIO = 1;
+    TextView titleNameMusic;
     ArrayList<String> categoriesTitleArrayList,CategoryIdArrayList;
     ArrayList<String> singerTitleArrayList,singerIdArrayList;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mFirebaseAuth = FirebaseAuth.getInstance();
+
     }
 
     @Nullable
@@ -61,35 +90,161 @@ public class addFileMp3 extends Fragment {
         addFileMp3Binding.btnBack.setOnClickListener(v->{
             requireActivity().onBackPressed();
         });
+
+
         return addFileMp3Binding.getRoot();
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //handle Click selected Pickture from gellary
-        addFileMp3Binding.imgSimger.setOnClickListener(v->{
-            showImageAttachMenu();
-        });
-        //handle Click selected file mp3 from gallery
-        addFileMp3Binding.imgFileMp.setOnClickListener(v -> {
-            selectFileMp3();
-        });
+
         addFileMp3Binding.tvCategory.setOnClickListener(v ->{
             categoryPickDialog();
         });
         addFileMp3Binding.tvTitleSinger.setOnClickListener(v ->{
             SingerPickDialog();
         });
+
+
         loadCategory();
         loadSinger();
         //setup progress dialog
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setTitle("Please wait..");
         progressDialog.setCanceledOnTouchOutside(false);
+        addFileMp3Binding.btnUploadMp.setOnClickListener(v ->{
+            Mp3PickIntent();
+
+        });
+    addFileMp3Binding.AdMusic.setOnClickListener(v->{
+        validateData();
+    });
+
+    }
+    private String title = "";
+    private void validateData() {
+        //Step:validate Data
+        Log.d(TAG, "validateData: validating data...");
+        //Step getData
+        title = addFileMp3Binding.etTitleMusic.getText().toString().trim();
+
+        //validate Data
+        if(TextUtils.isEmpty(title)){
+            Toast.makeText(requireActivity(), "Nhập tên bài hát..", Toast.LENGTH_SHORT).show();
+        }else if(TextUtils.isEmpty(selectedSingerTitle)){
+            Toast.makeText(requireActivity(), "Chọn Ca sĩ..", Toast.LENGTH_SHORT).show();
+
+        }else if(TextUtils.isEmpty(selectedCategoryTitle)){
+            Toast.makeText(requireActivity(), "Yêu cầu chọn thể loại..", Toast.LENGTH_SHORT).show();
+        }
+        else if(AudioUri==null){
+            Toast.makeText(requireActivity(), "Chọn Nhạc..", Toast.LENGTH_SHORT).show();
+        }else{
+            //all dataa is valid can upload now
+            uploadMp3Storage();
+        }
 
 
+    }
+
+    private void uploadMp3Storage() {
+        //Step2:Validate data
+        Log.d(TAG, "uploadMp3Storage: ");
+
+
+        //show progressdialog
+        progressDialog.setMessage("Uploading dialog...");
+        progressDialog.show();
+        //timestamp
+        long timetamp = System.currentTimeMillis();
+        //path off pdfin firebase storage
+        String filepathName = "MusicMp3/" +timetamp;
+        //Storage refendence
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(filepathName);
+        storageReference.putFile(AudioUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Log.d(TAG, "onSuccess: Mp3 uploaded to storage...");
+                        Log.d(TAG, "onSuccess: geting mp3 url");
+                        Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                        //get pdf url
+                        while (!uriTask.isSuccessful());
+                        String uploadMp3url = "" +uriTask.getResult();
+                        //upload to firebase db
+                        uploadToInfoDb(uploadMp3url,timetamp);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progressDialog.dismiss();
+                        Log.d("mp6", "onFailure: Mp3 upload failed..."+e.getMessage());
+                        Toast.makeText(requireActivity(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+    }
+
+    private void uploadToInfoDb(String uploadMp3url, long timetamp) {
+        //Step3:Upload pdf info to firebase db
+
+        Log.d(TAG, "uploadPdfStorage:Uploading pdf info to firebase db... ");
+        progressDialog.setMessage("Uploading pdf info...");
+        String uid = mFirebaseAuth.getUid();
+        //Setup data to upload also add view count ,download count wwhile adding pdf/book
+
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("uid",""+uid);
+        hashMap.put("id",""+timetamp);
+        hashMap.put("title",""+title);
+        hashMap.put("categoryId",""+selectedCategoryId);
+        hashMap.put("singerId",""+selectedSingerId);
+        hashMap.put("url",""+uploadMp3url);
+
+        //db reference DB>Books
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("MusicMp3");
+        ref.child("" +timetamp)
+                .setValue(hashMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        progressDialog.dismiss();
+                        Log.d(TAG, "onSuccess:Successfully uploaded...");
+                        Toast.makeText(requireActivity(), "Cập nhật mp3 Thành công", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        progressDialog.dismiss();
+                        Log.d(TAG, "onFailure: Failed to upload to db due to"+e.getMessage());
+                        Toast.makeText(requireActivity(), "Cập nhật mp3 Thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void Mp3PickIntent() {
+        Intent audio = new Intent();
+        audio.setType("audio/*");
+        audio.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(audio, "Select Audio"), PICK_AUDIO);
+
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == PICK_AUDIO && resultCode == RESULT_OK) {
+            // Audio is Picked in format of URI
+            AudioUri = data.getData();
+
+//            addFileMp3Binding.nameFileMp3.setText(AudioUri.getUserInfo());
+        }
     }
     private  String selectedCategoryId,selectedCategoryTitle;
     private  String selectedSingerId,selectedSingerTitle;
@@ -218,86 +373,12 @@ public class addFileMp3 extends Fragment {
     }
 
     private void selectFileMp3() {
+
         
     }
 
-    private void showImageAttachMenu() {
-        PopupMenu popup = new PopupMenu(requireActivity(),addFileMp3Binding.imgSimger);
-        popup.getMenu().add(Menu.NONE,0,0,"Camera");
-        popup.getMenu().add(Menu.NONE,1,1,"Gallery");
-        popup.show();
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                int which  = item.getItemId();
-                if(which ==0){
-                    //Camera
-                    pickImageCamera();
-                }else if(which ==1){
-                    //Gallery
-                     pickImageGallery();
-                }
-                return false;
-            }
-        });
-
-    }
-    private void pickImageGallery() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        galleryResultLauncher.launch(intent);
-    }
-
-    private void pickImageCamera() {
-        //intent to pick image from camera
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(MediaStore.Images.Media.TITLE,"Chọn Mới");
-        contentValues.put(MediaStore.Images.Media.DESCRIPTION,"");
-        imageUri = requireActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValues);
 
 
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
-        cameraResultLauncher.launch(intent);
 
 
-    }
-    private ActivityResultLauncher<Intent> cameraResultLauncher= registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    Log.d(TAG, "onActivityResult: "+imageUri);
-                    //used to handle result of camera
-                    //get uri of image
-                    if(result.getResultCode() == Activity.RESULT_OK){
-                        Intent data  = result.getData(); //no need here as in camera case we alrealdy  have image in imageuri varible
-                        addFileMp3Binding.imgSimger.setImageURI(imageUri);
-
-                    }else{
-                        Toast.makeText(requireActivity(), "Thử lại", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-            }
-    );
-    private ActivityResultLauncher<Intent> galleryResultLauncher= registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    //get uri of image
-                    if(result.getResultCode() == Activity.RESULT_OK){
-                        Log.d(TAG, "onActivityResult: "+imageUri);
-                        Intent data  = result.getData(); //no need here as in camera case we alrealdy  have image in imageuri varible
-                        imageUri = data.getData();
-                        Log.d(TAG, "onActivityResult: "+imageUri    );
-                        addFileMp3Binding.imgSimger.setImageURI(imageUri);
-
-                    }else{
-                        Toast.makeText(requireActivity(), "Thử lại", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
-    );
 }

@@ -138,7 +138,10 @@ public class MainActivity extends AppCompatActivity {
             MenuItem profile = nav_Menu.findItem(R.id.item_profile);
             target.setVisible(false);
             profile.setVisible(true);
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         }
         if (firstKeyNameLogout != null){
             Menu nav_Menu = mNavView.getMenu();
@@ -146,7 +149,10 @@ public class MainActivity extends AppCompatActivity {
             MenuItem profile = nav_Menu.findItem(R.id.item_profile);
             target.setVisible(true);
             profile.setVisible(false);
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         }
 
     }
